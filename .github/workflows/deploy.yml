@@ -1,0 +1,55 @@
+name: Deploy to Hostinger
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout repo
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Setup Node (prevents random version issues)
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      # 3. Install + build (only if Node project)
+      - name: Install dependencies and build
+        if: hashFiles('package.json') != ''
+        run: |
+          npm ci
+          npm run build
+
+      # 4. Detect correct output folder
+      - name: Resolve deploy output folder
+        id: deploy-path
+        run: |
+          if [ -d out ]; then echo "dir=./out/" >> $GITHUB_OUTPUT
+          elif [ -d dist ]; then echo "dir=./dist/" >> $GITHUB_OUTPUT
+          elif [ -d build ]; then echo "dir=./build/" >> $GITHUB_OUTPUT
+          else echo "dir=./" >> $GITHUB_OUTPUT
+          fi
+
+      # 5. Deploy via FTP (clean deploy = no nesting issues)
+      - name: Deploy to Hostinger via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ${{ steps.deploy-path.outputs.dir }}
+          server-dir: /public_html/
+          dangerous-clean-slate: true
+          state-name: .ftp-deploy-sync-state.json
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/.github/**
