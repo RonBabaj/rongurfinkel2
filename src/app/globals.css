@@ -7,7 +7,7 @@ html {
 }
 
 :root {
-  --accent: 174 72% 52%; /* #2DD4BF — Base44 brand teal */
+  --accent: 172 76% 54%; /* #2EE6D4 — brand teal (punchier) */
   --muted: 148 163 184; /* slate-400 */
   /* Light theme canvas (shows through transparent layers) */
   --light-bg: #dce3ec;
@@ -25,21 +25,39 @@ body {
       90deg,
       transparent,
       transparent 107px,
-      rgba(45, 212, 191, 0.075) 107px,
-      rgba(45, 212, 191, 0.075) 108px
+      rgba(46, 230, 212, 0.095) 107px,
+      rgba(46, 230, 212, 0.095) 108px
     ),
     /* Dot grid — mint on cool gray */
-    radial-gradient(rgba(45, 212, 191, 0.1) 1px, transparent 1px),
+    radial-gradient(rgba(46, 230, 212, 0.14) 1px, transparent 1px),
     /* Teal bloom (mirror dark ellipse, lighter) */
-    radial-gradient(ellipse 90% 55% at 50% -15%, rgba(45, 212, 191, 0.11), transparent 55%),
+    radial-gradient(ellipse 90% 55% at 50% -15%, rgba(46, 230, 212, 0.14), transparent 55%),
     /* Indigo corner accent (mirror dark, lighter) */
-    radial-gradient(ellipse 50% 35% at 100% 0%, rgba(99, 102, 241, 0.07), transparent 50%);
+    radial-gradient(ellipse 50% 35% at 100% 0%, rgba(99, 102, 241, 0.1), transparent 50%);
   background-size:
     auto,
     auto,
     36px 36px,
     auto,
     auto;
+}
+
+/* Hebrew: native line rhythm + Noto Sans Hebrew (see layout.tsx `--font-hebrew`) */
+html[lang="he"] body {
+  font-family: var(--font-hebrew), var(--font-sans), system-ui, sans-serif;
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+
+html[lang="he"] .font-mono {
+  font-family: var(--font-mono), "JetBrains Mono", ui-monospace, monospace;
+}
+
+html[lang="he"] h1,
+html[lang="he"] h2,
+html[lang="he"] h3 {
+  line-height: 1.28;
+  text-wrap: balance;
 }
 
 html.dark body {
@@ -51,12 +69,12 @@ html.dark body {
       90deg,
       transparent,
       transparent 107px,
-      rgba(45, 212, 191, 0.06) 107px,
-      rgba(45, 212, 191, 0.06) 108px
+      rgba(46, 230, 212, 0.085) 107px,
+      rgba(46, 230, 212, 0.085) 108px
     ),
-    radial-gradient(rgba(45, 212, 191, 0.2) 1px, transparent 1px),
-    radial-gradient(ellipse 90% 55% at 50% -15%, rgba(45, 212, 191, 0.09), transparent 55%),
-    radial-gradient(ellipse 50% 35% at 100% 0%, rgba(99, 102, 241, 0.06), transparent 50%);
+    radial-gradient(rgba(46, 230, 212, 0.26) 1px, transparent 1px),
+    radial-gradient(ellipse 90% 55% at 50% -15%, rgba(46, 230, 212, 0.12), transparent 55%),
+    radial-gradient(ellipse 50% 35% at 100% 0%, rgba(99, 102, 241, 0.085), transparent 50%);
   background-size:
     auto,
     36px 36px,
@@ -89,12 +107,12 @@ html.dark body::before {
 }
 
 ::selection {
-  background-color: rgba(45, 212, 191, 0.25);
+  background-color: rgba(46, 230, 212, 0.3);
   color: #f8fafc;
 }
 
 html:not(.dark) ::selection {
-  background-color: rgba(45, 212, 191, 0.28);
+  background-color: rgba(46, 230, 212, 0.32);
   color: #0f172a;
 }
 
@@ -120,12 +138,12 @@ a {
   }
 
   .glass-card {
-    @apply rounded-xl border border-slate-300/75 bg-slate-50/90 backdrop-blur-md shadow-sm shadow-slate-900/[0.04];
+    @apply rounded-xl border border-slate-300/80 bg-slate-50/90 backdrop-blur-md shadow-sm shadow-slate-900/[0.06] shadow-teal-600/[0.04];
   }
 
   html.dark .glass-card {
     background: rgba(15, 23, 42, 0.72);
-    @apply border-teal-400/10 shadow-none backdrop-blur-md;
+    @apply border-teal-400/20 shadow-md shadow-teal-500/[0.06] backdrop-blur-md;
   }
 
   .page-shell {
@@ -150,7 +168,7 @@ a {
 
 /* Typing caret — matches emerald strings (no glow; keeps text crisp) */
 .code-cursor-hero {
-  color: #6ee7b7;
+  color: #5eead4;
 }
 
 /* Stagger children for list/card animations */
@@ -211,27 +229,27 @@ a {
 .timeline-spine {
   background: linear-gradient(
     to bottom,
-    rgba(45, 212, 191, 0.45) 0%,
-    rgba(45, 212, 191, 0.12) 35%,
-    rgba(45, 212, 191, 0.08) 65%,
-    rgba(45, 212, 191, 0.35) 100%
+    rgba(46, 230, 212, 0.52) 0%,
+    rgba(46, 230, 212, 0.16) 35%,
+    rgba(46, 230, 212, 0.1) 65%,
+    rgba(46, 230, 212, 0.42) 100%
   );
   box-shadow:
-    0 0 18px rgba(45, 212, 191, 0.12),
-    0 0 2px rgba(45, 212, 191, 0.35);
+    0 0 22px rgba(46, 230, 212, 0.16),
+    0 0 2px rgba(46, 230, 212, 0.42);
 }
 
 @keyframes timeline-node-glow {
   0%,
   100% {
     box-shadow:
-      0 0 12px rgba(45, 212, 191, 0.75),
-      0 0 0 0 rgba(45, 212, 191, 0.35);
+      0 0 14px rgba(46, 230, 212, 0.85),
+      0 0 0 0 rgba(46, 230, 212, 0.4);
   }
   50% {
     box-shadow:
-      0 0 22px rgba(45, 212, 191, 0.95),
-      0 0 36px rgba(45, 212, 191, 0.22);
+      0 0 26px rgba(46, 230, 212, 1),
+      0 0 40px rgba(46, 230, 212, 0.28);
   }
 }
 
@@ -250,22 +268,22 @@ a {
   bottom: -2px;
   height: 1px;
   width: 0;
-  background: linear-gradient(90deg, transparent, rgba(45, 212, 191, 0.85), rgba(45, 212, 191, 0.5));
+  background: linear-gradient(90deg, transparent, rgba(46, 230, 212, 0.92), rgba(46, 230, 212, 0.55));
   transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .link-arrow-shift:hover::after {
   width: 100%;
 }
 html.dark .link-arrow-shift::after {
-  background: linear-gradient(90deg, transparent, rgba(45, 212, 191, 0.95), rgba(45, 212, 191, 0.65));
+  background: linear-gradient(90deg, transparent, rgba(46, 230, 212, 1), rgba(46, 230, 212, 0.72));
 }
 
 /* Underline sweep matches inline direction in RTL */
 html[dir="rtl"] .link-arrow-shift::after {
-  background: linear-gradient(270deg, transparent, rgba(45, 212, 191, 0.85), rgba(45, 212, 191, 0.5));
+  background: linear-gradient(270deg, transparent, rgba(46, 230, 212, 0.92), rgba(46, 230, 212, 0.55));
 }
 html.dark[dir="rtl"] .link-arrow-shift::after {
-  background: linear-gradient(270deg, transparent, rgba(45, 212, 191, 0.95), rgba(45, 212, 191, 0.65));
+  background: linear-gradient(270deg, transparent, rgba(46, 230, 212, 1), rgba(46, 230, 212, 0.72));
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -289,8 +307,13 @@ html.dark[dir="rtl"] .link-arrow-shift::after {
   }
   .animate-scroll-hint-line {
     animation: none !important;
-    opacity: 0.85 !important;
+    opacity: 0.9 !important;
     transform: none !important;
+  }
+  .animate-scroll-hint-chevron {
+    animation: none !important;
+    transform: none !important;
+    opacity: 0.9 !important;
   }
   .code-cursor {
     animation: none !important;

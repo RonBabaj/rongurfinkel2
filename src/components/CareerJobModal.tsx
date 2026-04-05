@@ -143,8 +143,8 @@ export function CareerJobModal({ job, onClose }: CareerJobModalProps) {
         >
           <h2
             id="career-modal-title"
-            className={`font-sans font-semibold text-slate-900 dark:text-slate-100 ${
-              fullscreen ? "text-2xl sm:text-3xl" : "text-xl"
+            className={`font-sans font-bold tracking-tight text-slate-950 dark:text-white ${
+              fullscreen ? "text-2xl sm:text-3xl" : "text-xl sm:text-2xl"
             }`}
           >
             {job.title}

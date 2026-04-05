@@ -18,13 +18,13 @@ export function ProjectsContent() {
       <section className="border-t border-slate-200/80 dark:border-white/5 -mt-px pt-2">
         <Reveal>
           <SectionMarker className="mb-3">{t("projects.sectionMarker")}</SectionMarker>
-          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10 rtl:sm:flex-col rtl:sm:items-start rtl:sm:gap-3">
             <h1 className="font-sans text-3xl sm:text-4xl font-semibold tracking-tight text-slate-900 dark:text-slate-100">
               {t("projects.title")}
             </h1>
             <Link
               href="/"
-              className="link-arrow-shift inline-flex items-center gap-1 font-mono text-sm text-brand-dim dark:text-brand transition-all duration-300 hover:gap-2 shrink-0"
+              className="link-arrow-shift inline-flex items-center gap-1 rtl:flex-row-reverse font-mono text-sm text-brand-dim dark:text-brand transition-all duration-300 hover:gap-2 shrink-0"
             >
               {t("projects.backHome")}
               <ArrowRight className="w-4 h-4 rtl:rotate-180 shrink-0" aria-hidden />

@@ -1,5 +1,5 @@
-import type { Metadata, Viewport } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import type { Viewport } from "next";
+import { Inter, JetBrains_Mono, Noto_Sans_Hebrew } from "next/font/google";
 import "./globals.css";
 import { ThemeScript } from "@/components/ThemeScript";
 import { ThemeProvider } from "@/contexts/ThemeContext";
@@ -7,6 +7,9 @@ import { LocaleProvider } from "@/contexts/LocaleContext";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { CustomCursor } from "@/components/CustomCursor";
+import { rootMetadata, buildJsonLdGraph } from "@/lib/seo";
+
+export { rootMetadata as metadata };
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const jetbrainsMono = JetBrains_Mono({
@@ -15,12 +18,13 @@ const jetbrainsMono = JetBrains_Mono({
   weight: ["400", "500", "600", "700"],
   display: "swap",
 });
-
-export const metadata: Metadata = {
-  title: "Ron Gurfinkel — Developer, Designer, Hobbyist Musician",
-  description:
-    "Personal portfolio: projects, skills, and experience. Developer and designer focused on real projects and growth.",
-};
+/** Hebrew UI — pairs with `html[lang="he"]` rules in globals.css */
+const notoSansHebrew = Noto_Sans_Hebrew({
+  subsets: ["hebrew"],
+  variable: "--font-hebrew",
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
 
 export const viewport: Viewport = {
   themeColor: [
@@ -34,14 +38,20 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const jsonLd = buildJsonLdGraph();
+
   return (
     <html
       lang="en"
       dir="ltr"
-      className={`${inter.variable} ${jetbrainsMono.variable}`}
+      className={`${inter.variable} ${jetbrainsMono.variable} ${notoSansHebrew.variable}`}
       suppressHydrationWarning
     >
       <body className="font-sans min-h-screen flex flex-col">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <ThemeScript />
         <ThemeProvider>
           <LocaleProvider>

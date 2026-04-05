@@ -34,6 +34,7 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
   const { locale, setLocale, t } = useLocale();
+  const githubLabel = t("nav.github");
 
   const linkClass = (href: string) =>
     `text-xs font-medium uppercase tracking-widest transition-colors duration-200 ${
@@ -48,15 +49,16 @@ export function Header() {
         <Link
           href="/"
           data-cursor-hover
-          className="font-mono text-sm text-brand-dim dark:text-brand shrink-0 hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-brand/50 focus:ring-offset-2 focus:ring-offset-slate-200/90 dark:focus:ring-offset-black rounded"
+          aria-label={t("nav.home")}
+          className="font-mono text-sm text-brand-dim dark:text-brand shrink-0 hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-brand/50 focus:ring-offset-2 focus:ring-offset-slate-200/90 dark:focus:ring-offset-black rounded inline-flex items-center"
         >
-          <span dir="ltr">ron.gurfinkel</span>
+          <span dir={locale === "he" ? "rtl" : "ltr"}>{t("nav.brandName")}</span>
           <span className="code-cursor inline-block min-w-[0.55ch] text-brand" aria-hidden>
             _
           </span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-4 lg:gap-6 flex-wrap justify-end">
+        <nav className="hidden md:flex items-center gap-4 lg:gap-6 flex-wrap justify-end min-w-0">
           {navLinks.map(({ href, labelKey }) => (
             <Link
               key={href}
@@ -78,10 +80,19 @@ export function Header() {
             target="_blank"
             rel="noopener noreferrer"
             data-cursor-hover
-            className="inline-flex items-center rtl:flex-row-reverse rounded-md border border-brand/50 px-3 py-1.5 text-xs font-medium uppercase tracking-wider text-brand-dim dark:text-brand hover:bg-brand/10 transition-colors"
+            className="inline-flex items-center gap-1.5 rounded-md border border-brand/50 px-3 py-1.5 text-xs font-medium uppercase tracking-wider text-brand-dim dark:text-brand hover:bg-brand/10 transition-colors"
           >
-            <Github className="w-3.5 h-3.5 me-1.5" aria-hidden />
-            GitHub
+            {locale === "he" ? (
+              <>
+                <span>{githubLabel}</span>
+                <Github className="w-3.5 h-3.5 shrink-0" aria-hidden />
+              </>
+            ) : (
+              <>
+                <Github className="w-3.5 h-3.5 shrink-0" aria-hidden />
+                <span>{githubLabel}</span>
+              </>
+            )}
           </a>
           <div className="flex items-center gap-1 ps-3 border-s border-slate-200 dark:border-white/10">
             <button
@@ -141,7 +152,7 @@ export function Header() {
       </div>
 
       {mobileOpen && (
-        <nav className="md:hidden border-t border-slate-200 dark:border-white/5 px-4 py-3 flex flex-col gap-2 animate-fade-in">
+        <nav className="md:hidden border-t border-slate-200 dark:border-white/5 px-4 py-3 flex flex-col gap-2 animate-fade-in text-start">
           {navLinks.map(({ href, labelKey }) => (
             <Link
               key={href}
@@ -171,8 +182,17 @@ export function Header() {
             className="py-2 text-sm uppercase tracking-wide text-slate-600 dark:text-slate-400 flex items-center gap-2"
             onClick={() => setMobileOpen(false)}
           >
-            <Github className="w-4 h-4 shrink-0" aria-hidden />
-            GitHub
+            {locale === "he" ? (
+              <>
+                <span>{githubLabel}</span>
+                <Github className="w-4 h-4 shrink-0" aria-hidden />
+              </>
+            ) : (
+              <>
+                <Github className="w-4 h-4 shrink-0" aria-hidden />
+                <span>{githubLabel}</span>
+              </>
+            )}
           </a>
         </nav>
       )}

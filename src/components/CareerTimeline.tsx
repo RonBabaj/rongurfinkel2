@@ -33,12 +33,12 @@ function CareerEntryCard({
       />
       <div className="relative">
         <p
-          className="mb-3 inline-block rounded-full border border-slate-200/90 bg-slate-100/90 px-3 py-1 font-mono text-[11px] text-slate-600 transition-colors duration-300 group-hover/card:border-brand/25 group-hover/card:text-slate-700 dark:border-white/10 dark:bg-slate-900/60 dark:text-slate-400 dark:group-hover/card:border-brand/30 dark:group-hover/card:text-slate-300"
+          className="mb-3 inline-block rounded-full border border-slate-200/90 bg-slate-100/90 px-3 py-1 font-mono text-[11px] font-normal text-slate-500 transition-colors duration-300 group-hover/card:border-brand/25 group-hover/card:text-slate-600 dark:border-white/10 dark:bg-slate-900/60 dark:text-slate-500 dark:group-hover/card:border-brand/30 dark:group-hover/card:text-slate-400"
           dir="ltr"
         >
           {job.date}
         </p>
-        <h3 className="font-sans text-lg font-semibold text-slate-900 transition-colors duration-300 group-hover/card:text-slate-800 dark:text-slate-100 dark:group-hover/card:text-white">
+        <h3 className="font-sans text-xl font-bold leading-snug tracking-tight text-slate-950 transition-colors duration-300 group-hover/card:text-slate-900 dark:text-white dark:group-hover/card:text-white">
           {job.title}
         </h3>
         <p className="mt-1 font-mono text-sm text-brand-dim transition-colors duration-300 group-hover/card:text-brand dark:text-brand dark:group-hover/card:text-brand">
@@ -91,7 +91,8 @@ export function CareerTimeline({
 
       <ul className="relative z-[1] m-0 list-none space-y-10 p-0 md:space-y-14">
         {jobs.map((job, i) => {
-          const cardLeft = i % 2 === 0;
+          /* LTR: even index → left column; RTL: mirror so reading order follows the spine */
+          const cardLeft = locale === "he" ? i % 2 !== 0 : i % 2 === 0;
           return (
             <li
               key={job.company}

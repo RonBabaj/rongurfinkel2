@@ -23,8 +23,8 @@ const config: Config = {
         obsidian: "#05070A",
         midnight: "#0F172A",
         brand: {
-          DEFAULT: "#2DD4BF",
-          dim: "#14b8a6",
+          DEFAULT: "#2EE6D4",
+          dim: "#0d9488",
         },
         indigo: {
           accent: "#6366F1",
@@ -42,14 +42,19 @@ const config: Config = {
           "100%": { opacity: "1" },
         },
         "scroll-hint-line": {
-          "0%, 100%": { opacity: "0.35", transform: "scaleY(0.92)" },
-          "50%": { opacity: "0.95", transform: "scaleY(1)" },
+          "0%, 100%": { opacity: "0.55", transform: "scaleY(0.88)" },
+          "50%": { opacity: "1", transform: "scaleY(1)" },
+        },
+        "scroll-hint-chevron": {
+          "0%, 100%": { transform: "translateY(0)", opacity: "0.75" },
+          "50%": { transform: "translateY(5px)", opacity: "1" },
         },
       },
       animation: {
         "fade-in-up": "fade-in-up 0.5s ease-out forwards",
         "fade-in": "fade-in 0.4s ease-out forwards",
-        "scroll-hint-line": "scroll-hint-line 2.4s ease-in-out infinite",
+        "scroll-hint-line": "scroll-hint-line 2.2s ease-in-out infinite",
+        "scroll-hint-chevron": "scroll-hint-chevron 2.2s ease-in-out infinite",
       },
     },
   },

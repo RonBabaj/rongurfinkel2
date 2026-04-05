@@ -4,6 +4,7 @@ import {
   createContext,
   useContext,
   useEffect,
+  useLayoutEffect,
   useState,
   useCallback,
   type ReactNode,
@@ -41,16 +42,18 @@ function applyLocale(locale: Locale) {
   root.setAttribute("dir", locale === "he" ? "rtl" : "ltr");
 }
 
+const useIsomorphicLayoutEffect =
+  typeof window !== "undefined" ? useLayoutEffect : useEffect;
+
 export function LocaleProvider({ children }: { children: ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>(DEFAULT_LOCALE);
-  const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
+  /** Hydrate locale from localStorage and sync `<html lang dir>` before paint (ThemeScript already primed first paint). */
+  useIsomorphicLayoutEffect(() => {
     const stored = localStorage.getItem(STORAGE_KEY) as Locale | null;
     const next = stored === "he" || stored === "en" ? stored : DEFAULT_LOCALE;
     setLocaleState(next);
     applyLocale(next);
-    setMounted(true);
   }, []);
 
   const setLocale = useCallback((next: Locale) => {
@@ -68,13 +71,6 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
     },
     [locale]
   );
-
-  useEffect(() => {
-    if (mounted) {
-      localStorage.setItem(STORAGE_KEY, locale);
-      applyLocale(locale);
-    }
-  }, [mounted, locale]);
 
   const isRTL = locale === "he";
   const dir: "rtl" | "ltr" = isRTL ? "rtl" : "ltr";

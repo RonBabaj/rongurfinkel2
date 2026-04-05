@@ -4,7 +4,10 @@ import { useState, type FormEvent, type ReactNode } from "react";
 import { MapPin } from "lucide-react";
 import { useLocale } from "@/contexts/LocaleContext";
 
-const MAILTO = "mailto:info@rongurfinkel.com";
+const CONTACT_EMAIL = "ronzvi200@gmail.com";
+const MAILTO = `mailto:${CONTACT_EMAIL}`;
+const LINKEDIN_HREF = "https://il.linkedin.com/in/ron-gurfinkel-44966a244";
+const LINKEDIN_DISPLAY = "il.linkedin.com/in/ron-gurfinkel-44966a244";
 
 function ContactInfoCard({
   label,
@@ -39,7 +42,7 @@ function ContactInfoCard({
 }
 
 export function LandingContactForm() {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
   const [sentHint, setSentHint] = useState(false);
 
   function onSubmit(e: FormEvent<HTMLFormElement>) {
@@ -63,7 +66,7 @@ export function LandingContactForm() {
     "block w-full text-sm text-slate-700 dark:text-slate-200 font-mono break-all hover:text-brand dark:hover:text-brand transition-colors data-cursor-hover";
 
   const cardClass =
-    "rounded-lg border border-slate-300/90 dark:border-white/[0.1] bg-slate-100/95 dark:bg-[rgba(15,23,42,0.65)] px-4 py-3 shadow-sm dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]";
+    "rounded-lg border border-slate-300/90 dark:border-white/[0.1] bg-slate-100/95 dark:bg-[rgba(15,23,42,0.65)] px-4 py-3 shadow-sm dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] text-start";
 
   return (
     <div className="space-y-8">
@@ -124,10 +127,10 @@ export function LandingContactForm() {
               cardClass={cardClass}
               labelClass={labelClass}
               label={t("contact.email")}
-              href="mailto:info@rongurfinkel.com"
+              href={MAILTO}
               linkClass={contactLinkClass}
             >
-              info@rongurfinkel.com
+              {CONTACT_EMAIL}
             </ContactInfoCard>
             <ContactInfoCard
               cardClass={cardClass}
@@ -143,17 +146,26 @@ export function LandingContactForm() {
               cardClass={cardClass}
               labelClass={labelClass}
               label={t("contact.linkedin")}
-              href="https://linkedin.com/in/ron-gurfinkel-44966a244"
+              href={LINKEDIN_HREF}
               external
               linkClass={contactLinkClass}
             >
-              linkedin.com/in/ron-gurfinkel
+              {LINKEDIN_DISPLAY}
             </ContactInfoCard>
             <div className={cardClass}>
               <p className={`${labelClass} uppercase`}>{t("home.locationLabel")}</p>
               <p className="text-sm text-slate-700 dark:text-slate-200 font-mono flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-brand/80 shrink-0" aria-hidden />
-                {t("home.locationValue")}
+                {locale === "he" ? (
+                  <>
+                    <span>{t("home.locationValue")}</span>
+                    <MapPin className="w-4 h-4 text-brand/80 shrink-0" aria-hidden />
+                  </>
+                ) : (
+                  <>
+                    <MapPin className="w-4 h-4 text-brand/80 shrink-0" aria-hidden />
+                    <span>{t("home.locationValue")}</span>
+                  </>
+                )}
               </p>
             </div>
           </div>
@@ -164,10 +176,10 @@ export function LandingContactForm() {
             cardClass={cardClass}
             labelClass={labelClass}
             label={t("contact.email")}
-            href="mailto:info@rongurfinkel.com"
+            href={MAILTO}
             linkClass={contactLinkClass}
           >
-            info@rongurfinkel.com
+            {CONTACT_EMAIL}
           </ContactInfoCard>
           <ContactInfoCard
             cardClass={cardClass}
@@ -183,17 +195,26 @@ export function LandingContactForm() {
             cardClass={cardClass}
             labelClass={labelClass}
             label={t("contact.linkedin")}
-            href="https://linkedin.com/in/ron-gurfinkel-44966a244"
+            href={LINKEDIN_HREF}
             external
             linkClass={contactLinkClass}
           >
-            linkedin.com/in/ron-gurfinkel
+            {LINKEDIN_DISPLAY}
           </ContactInfoCard>
           <div className={cardClass}>
             <p className={`${labelClass} uppercase`}>{t("home.locationLabel")}</p>
             <p className="text-sm text-slate-700 dark:text-slate-200 font-mono flex items-center gap-2">
-              <MapPin className="w-4 h-4 text-brand/80 shrink-0" aria-hidden />
-              {t("home.locationValue")}
+              {locale === "he" ? (
+                <>
+                  <span>{t("home.locationValue")}</span>
+                  <MapPin className="w-4 h-4 text-brand/80 shrink-0" aria-hidden />
+                </>
+              ) : (
+                <>
+                  <MapPin className="w-4 h-4 text-brand/80 shrink-0" aria-hidden />
+                  <span>{t("home.locationValue")}</span>
+                </>
+              )}
             </p>
           </div>
         </aside>

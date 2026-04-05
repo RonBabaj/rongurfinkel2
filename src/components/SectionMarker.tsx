@@ -1,26 +1,31 @@
 "use client";
 
 import type { ReactNode } from "react";
+import { useLocale } from "@/contexts/LocaleContext";
 
 /**
  * Terminal-style section label (Base44: // 01. WORK — uppercase, monospace).
- * Default `dir="ltr"` keeps // markers aligned like code. Use `dir="rtl"` for
- * locale-native hero lines (e.g. Hebrew greeting) so text aligns with `text-start`.
+ * Hebrew defaults to `dir="rtl"` so labels like `עבודה · 01 //` align with
+ * `text-start` (inline start = right). Pass `dir="ltr"` explicitly for LTR-only lines.
  */
 export function SectionMarker({
   children,
   className = "",
-  dir = "ltr",
+  dir: dirProp,
 }: {
   children: ReactNode;
   className?: string;
-  /** `"rtl"` for Hebrew hero copy; section markers with // 01. … stay `"ltr"`. */
   dir?: "ltr" | "rtl";
 }) {
+  const { locale } = useLocale();
+  const dir = dirProp ?? (locale === "he" ? "rtl" : "ltr");
+  const alignClass =
+    dir === "rtl" ? "text-start" : locale === "he" ? "text-end" : "text-start";
+
   return (
     <p
       dir={dir}
-      className={`font-mono text-xs sm:text-sm text-brand/90 dark:text-brand/80 tracking-wide uppercase text-start ${className}`}
+      className={`font-mono text-xs sm:text-sm text-brand/90 dark:text-brand/80 tracking-wide uppercase ${alignClass} isolate [unicode-bidi:isolate] ${className}`}
     >
       {children}
     </p>

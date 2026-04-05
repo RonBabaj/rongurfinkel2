@@ -37,7 +37,7 @@ export function ProfileCodeWindow() {
   const codeBody = useMemo(() => renderVisibleSegments(visible), [visible]);
 
   return (
-    <div className="group/profile code-hero-window relative rounded-2xl border border-slate-300/90 bg-[#0f172a] shadow-2xl shadow-black/50 transition-all duration-700 ease-out dark:border-white/[0.08] dark:bg-[#0f172a] max-w-[44rem] w-full overflow-hidden hover:border-emerald-400/25 hover:shadow-[0_0_72px_-28px_rgba(74,222,128,0.18)] dark:hover:border-emerald-400/30 dark:hover:shadow-[0_0_96px_-24px_rgba(74,222,128,0.15)]">
+    <div className="group/profile code-hero-window relative rounded-2xl border border-slate-300/90 bg-[#0f172a] shadow-2xl shadow-black/50 transition-all duration-700 ease-out dark:border-white/[0.08] dark:bg-[#0f172a] max-w-[44rem] w-full overflow-hidden hover:border-emerald-400/40 hover:shadow-[0_0_80px_-24px_rgba(46,230,212,0.22)] dark:hover:border-emerald-400/45 dark:hover:shadow-[0_0_100px_-20px_rgba(46,230,212,0.2)]">
       <div className="flex items-center gap-2.5 px-4 py-3 sm:px-5 sm:py-3.5 border-b border-white/[0.06] bg-black/25">
         <span className="flex gap-2" aria-hidden>
           <span className="h-3 w-3 rounded-full bg-[#ff5f57] sm:h-3.5 sm:w-3.5" />

@@ -5,8 +5,8 @@ import { BackToTop } from "./BackToTop";
 import { useLocale } from "@/contexts/LocaleContext";
 
 const LINK_GITHUB = "https://github.com/RonBabaj";
-const LINK_LINKEDIN = "https://linkedin.com/in/ron-gurfinkel-44966a244";
-const EMAIL = "mailto:info@rongurfinkel.com";
+const LINK_LINKEDIN = "https://il.linkedin.com/in/ron-gurfinkel-44966a244";
+const EMAIL = "mailto:ronzvi200@gmail.com";
 
 export function Footer() {
   const year = new Date().getFullYear();

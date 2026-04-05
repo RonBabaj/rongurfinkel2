@@ -66,6 +66,12 @@ On **push to `main`**, `.github/workflows/deploy.yml` installs dependencies, run
 
 Remote path is configured as **`/public_html/`** in the workflow (adjust there if your host uses a different web root).
 
+## SEO
+
+The canonical site URL defaults to **`https://rongurfinkel.com`**. For a staging or preview hostname, set **`NEXT_PUBLIC_SITE_URL`** (no trailing slash) so Open Graph links, **`sitemap.xml`**, and **`robots.txt`** use the correct origin.
+
+Build output includes **`/sitemap.xml`** and **`robots.txt`**. After deploy, add the property in [Google Search Console](https://search.google.com/search-console) and submit the sitemap URL (`…/sitemap.xml`).
+
 ## Requirements
 
 - **Node.js** 18+ recommended (matches Next.js expectations)

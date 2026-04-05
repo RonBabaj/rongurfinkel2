@@ -4,10 +4,14 @@ export const translations = {
   en: {
     nav: {
       home: "Home",
+      /** Header logo (monospace) — paired with blinking `_` cursor in Header */
+      brandName: "ron.gurfinkel",
       projects: "Projects",
       skillsHobbies: "Skills & Hobbies",
       career: "Career",
       contact: "Contact",
+      /** Header GitHub pill (desktop) */
+      github: "GitHub",
     },
     home: {
       title: "Ron Gurfinkel",
@@ -40,9 +44,9 @@ export const translations = {
       stackMobileTitle: "Mobile & Web",
       stackMobileBody: "Flutter, Android, React, WordPress, full-stack collaboration",
       careerHeading: "Career Ledger",
-      careerNetiotMeta: "NetIOT · Oct 2023 – Present",
+      careerNetiotMeta: "NetIOT · Oct 2023 – Aug 2025",
       careerNetiotCompany: "NetIOT",
-      careerNetiotDate: "Oct 2023 – Present",
+      careerNetiotDate: "Oct 2023 – Aug 2025",
       careerIdvMeta: "IDVision · Sep 2022 – Jun 2023",
       careerIdvCompany: "IDVision",
       careerIdvDate: "Sep 2022 – Jun 2023",
@@ -78,7 +82,7 @@ export const translations = {
       careerAkitaLine:
         "Web features with JavaScript and modern frontend tooling; Android Studio components and SDK work. APIs and automation (Puppeteer, jQuery). Git, Bitbucket, and GitHub for version control; web graphics in Photoshop.",
       careerNetiotDetail:
-        "At NetIOT I split time between software and hardware: maintaining production 3D printers, iterating on commercial part designs, and validating firmware and web UIs with structured manual QA. I investigate production issues across hardware and software, work with cross-functional teams to troubleshoot and improve reliability, turn prototypes into repeatable manufacturing outputs, and keep documentation useful for the next handoff.",
+        "At NetIOT (Oct 2023 – Aug 2025) I split time between software and hardware: maintaining production 3D printers, iterating on commercial part designs, and validating firmware and web UIs with structured manual QA. I investigated production issues across hardware and software, worked with cross-functional teams to troubleshoot and improve reliability, turned prototypes into repeatable manufacturing outputs, and kept documentation useful for the next handoff.",
       careerIdvDetail:
         "At IDVision I worked in a student full-stack role with an emphasis on shipping usable interfaces: responsive layouts, Flutter targets for web and mobile, and pragmatic integration with SQL-backed services. I paired with other developers to break down features, review edge cases, and keep releases small enough to reason about.",
       careerAkitaDetail:
@@ -158,10 +162,12 @@ export const translations = {
   he: {
     nav: {
       home: "בית",
+      brandName: "רון גורפינקל",
       projects: "פרויקטים",
       skillsHobbies: "כישורים ותחביבים",
       career: "קריירה",
       contact: "צור קשר",
+      github: "גיטהאב",
     },
     home: {
       title: "רון גורפנקל",
@@ -175,10 +181,10 @@ export const translations = {
       forTheRest: "בשביל השאר.",
       greeting: "// שלום — ברוכים הבאים לפורטפוליו",
       greetingHeBody: "שלום — ברוכים הבאים לפורטפוליו",
-      sectionWork: "// 01. עבודה",
-      sectionAbout: "// 02. אודות",
-      sectionCareer: "// 03. קריירה",
-      sectionContact: "// 04. קשר",
+      sectionWork: "עבודה · 01 //",
+      sectionAbout: "אודות · 02 //",
+      sectionCareer: "קריירה · 03 //",
+      sectionContact: "קשר · 04 //",
       ctaViewProjects: "לפרויקטים",
       ctaGetInTouch: "ליצירת קשר",
       featuredHeading: "פרויקטים",
@@ -193,9 +199,9 @@ export const translations = {
       stackMobileTitle: "מובייל ו-Web",
       stackMobileBody: "Flutter, Android, React, WordPress, שיתוף פעולה full-stack",
       careerHeading: "קריירה",
-      careerNetiotMeta: "NetIOT · אוק׳ 2023 – היום",
+      careerNetiotMeta: "NetIOT · אוק׳ 2023 – אוג׳ 2025",
       careerNetiotCompany: "NetIOT",
-      careerNetiotDate: "אוק׳ 2023 – היום",
+      careerNetiotDate: "אוק׳ 2023 – אוג׳ 2025",
       careerIdvMeta: "IDVision · ספט׳ 2022 – יוני 2023",
       careerIdvCompany: "IDVision",
       careerIdvDate: "ספט׳ 2022 – יוני 2023",
@@ -229,7 +235,7 @@ export const translations = {
       careerAkitaLine:
         "פיצ׳רי web ב-JavaScript ובכלים מודרניים; רכיבים ב-Android Studio וב-SDK. APIs ואוטומציה (Puppeteer, jQuery). Git, Bitbucket ו-GitHub לניהול גרסאות; עריכת גרפיקה ל-web ב-Photoshop.",
       careerNetiotDetail:
-        "ב-NetIOT אני משלב תוכנה וחומרה: תחזוקת מדפסות בייצור, איטרציות על חלקים מודפסים מסחריים, ו-QA ידני מובנה על קושחה וממשקי web. חקירת תקלות בפרודקשן בין תוכנה לחומרה, שיתוף פעולה עם צוותים להפחתת תקלות ושיפור אמינות, והפיכת אבות טיפוס לייצור חוזר עם תיעוד שמקל על המשך העבודה.",
+        "ב-NetIOT (אוק׳ 2023 – אוג׳ 2025) שילבתי בין תוכנה לחומרה: תחזוקת מדפסות בייצור, איטרציות על חלקים מודפסים מסחריים, ו-QA ידני מובנה על קושחה וממשקי web. חקירת תקלות בפרודקשן בין תוכנה לחומרה, שיתוף פעולה עם צוותים להפחתת תקלות ושיפור אמינות, והפיכת אבות טיפוס לייצור חוזר עם תיעוד שמקל על המשך העבודה.",
       careerIdvDetail:
         "ב-IDVision עבדתי בעמדת full stack לסטודנטים עם דגש על מסירת ממשקים שימושיים: פריסות רספונסיביות, יעדי Flutter ל-web ולמובייל, ואינטגרציה פרגמטית מול שירותים מבוססי SQL. שיתוף פעולה עם מפתחים לפירוק פיצ׳רים, בדיקת קצוות ושחרורים קטנים וברורים.",
       careerAkitaDetail:
@@ -245,7 +251,7 @@ export const translations = {
     },
     projects: {
       title: "פרויקטים",
-      sectionMarker: "// 01. קטלוג",
+      sectionMarker: "קטלוג · 01 //",
       intro:
         "אוסף הפרויקטים שלי: כרטיסים עם תצוגה מקדימה, סטטוס (חי / לא מקוון) והתמחות — אפשר לפתוח דמו או GitHub לפי מה שמוצג בכל כרטיס.",
       backHome: "בית",

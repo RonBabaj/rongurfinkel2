@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "@/data/types";
+import { useLocale } from "@/contexts/LocaleContext";
 import { FEATURED_YEAR, hrefForLandingProject, landingCardDisplay } from "@/data/landing";
 
 interface LandingFeaturedCardProps {
@@ -34,20 +35,23 @@ const cardClassName =
   "group glass-card relative flex flex-col overflow-hidden rounded-xl transition-all duration-500 ease-out hover:-translate-y-[6px] hover:border-brand/45 hover:shadow-[0_16px_48px_-14px_rgba(45,212,191,0.28)] dark:hover:border-brand/50 dark:hover:shadow-[0_0_44px_-6px_rgba(45,212,191,0.35)] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/50 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50 dark:focus-visible:ring-offset-black active:scale-[0.99]";
 
 export function LandingFeaturedCard({ project }: LandingFeaturedCardProps) {
+  const { isRTL } = useLocale();
   const href = hrefForLandingProject(project);
   const d = landingCardDisplay[project.id];
   if (!d) return null;
 
   const external = /^https?:\/\//.test(href);
 
+  const hoverGlow =
+    isRTL
+      ? "radial-gradient(ellipse 90% 70% at 20% -10%, rgba(45,212,191,0.14), transparent 50%)"
+      : "radial-gradient(ellipse 90% 70% at 80% -10%, rgba(45,212,191,0.14), transparent 50%)";
+
   const inner = (
     <>
       <div
         className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 z-[1]"
-        style={{
-          background:
-            "radial-gradient(ellipse 90% 70% at 80% -10%, rgba(45,212,191,0.14), transparent 50%)",
-        }}
+        style={{ background: hoverGlow }}
         aria-hidden
       />
       <div className="relative aspect-[16/9] w-full overflow-hidden bg-slate-900">
