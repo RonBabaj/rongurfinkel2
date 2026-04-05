@@ -45,7 +45,7 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ${{ steps.deploy-path.outputs.dir }}
-          server-dir: /public_html/
+          server-dir: /domains/rongurfinkel.com/public_html/
           dangerous-clean-slate: true
           state-name: .ftp-deploy-sync-state.json
           exclude: |
