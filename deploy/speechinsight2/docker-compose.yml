@@ -1,0 +1,16 @@
+# Local run (optional). From SpeechInsight2 repo root:
+#   docker compose -f deploy/speechinsight2/docker-compose.yml up --build
+# Then open http://localhost:8080
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: deploy/speechinsight2/Dockerfile
+    ports:
+      - "8080:8080"
+    env_file:
+      - deploy/speechinsight2/env.example
+    # Override PORT if your Caddyfile uses a different port
+    environment:
+      - PORT=8080

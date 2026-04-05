@@ -1,0 +1,25 @@
+# Caddy reverse proxy: one port for Render. Adjust API path if your backend uses a different prefix.
+# File size limit: 50MB for uploads (safety/cost control).
+{
+  order first
+}
+
+# Render sets PORT; default 8080 for local
+:{$PORT:8080} {
+  encode gzip
+
+  # API: forward to ASP.NET Core backend
+  handle_path /api/* {
+    request_body {
+      max_size 50MB
+    }
+    reverse_proxy localhost:5000
+  }
+
+  # UI: static files (Blazor WASM or similar)
+  handle {
+    root * /app/ui
+    try_files {path} /index.html
+    file_server
+  }
+}

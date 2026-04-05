@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#134e4a"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <rect x="120" y="80" width="560" height="290" rx="12" fill="#020617" stroke="#2dd4bf" stroke-opacity="0.35" stroke-width="2"/>
+  <path d="M140 120h200M140 150h320M140 180h260" stroke="#64748b" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
+  <circle cx="620" cy="200" r="48" fill="url(#glow)"/>
+  <path d="M580 200l24 24 48-56" stroke="#2dd4bf" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="400" y="360" text-anchor="middle" fill="#94a3b8" font-family="ui-monospace,monospace" font-size="22">portfolio</text>
+</svg>
