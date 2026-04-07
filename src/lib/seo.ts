@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { SITE_URL } from "./site";
 
+/** ~155 chars — tuned for Google snippet (distinct from generic Flutter template text). */
 const defaultDescription =
-  "Ron Gurfinkel — developer and designer: full-stack web & mobile projects, React, Flutter, Go, playground demos, and career highlights. Israel · English & Hebrew.";
+  "Official portfolio of Ron Gurfinkel: full-stack developer & designer — projects, live demos, career, and contact. React, Flutter, Go, web & mobile. Israel · EN/HE.";
 
 export const rootMetadata: Metadata = {
   metadataBase: new URL(SITE_URL),
+  applicationName: "Ron Gurfinkel",
   title: {
     default: "Ron Gurfinkel — Developer, Designer, Hobbyist Musician",
     template: "%s | Ron Gurfinkel",
@@ -53,7 +55,32 @@ export const rootMetadata: Metadata = {
   category: "technology",
 };
 
+/** Main crawlable routes — mirrors sitemap; helps crawlers understand site sections (sitelinks are still algorithmic). */
+const SITE_NAV: { name: string; path: string }[] = [
+  { name: "Projects", path: "/projects" },
+  { name: "Skills & Hobbies", path: "/about" },
+  { name: "Playground", path: "/playground" },
+  { name: "Career", path: "/career" },
+  { name: "Contact", path: "/contact" },
+];
+
 export function buildJsonLdGraph() {
+  const navItemList = {
+    "@type": "ItemList",
+    "@id": `${SITE_URL}/#site-sections`,
+    name: "Main sections",
+    numberOfItems: SITE_NAV.length,
+    itemListElement: SITE_NAV.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      item: {
+        "@type": "WebPage",
+        name: item.name,
+        url: `${SITE_URL}${item.path}`,
+      },
+    })),
+  };
+
   return {
     "@context": "https://schema.org",
     "@graph": [
@@ -62,10 +89,12 @@ export function buildJsonLdGraph() {
         "@id": `${SITE_URL}/#website`,
         url: SITE_URL,
         name: "Ron Gurfinkel",
+        alternateName: ["rongurfinkel.com", "Ron Gurfinkel portfolio"],
         description: defaultDescription,
         inLanguage: ["en", "he"],
         publisher: { "@id": `${SITE_URL}/#person` },
       },
+      navItemList,
       {
         "@type": "Person",
         "@id": `${SITE_URL}/#person`,

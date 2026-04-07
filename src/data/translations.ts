@@ -12,6 +12,7 @@ export const translations = {
       contact: "Contact",
       /** Header GitHub pill (desktop) */
       github: "GitHub",
+      playground: "Playground",
     },
     home: {
       title: "Ron Gurfinkel",
@@ -151,6 +152,7 @@ export const translations = {
     footer: {
       tagline: "Available for opportunities",
       builtWith: "Built with React",
+      siteNav: "Site pages",
     },
     a11y: {
       backToTop: "Back to top",
@@ -168,6 +170,7 @@ export const translations = {
       career: "קריירה",
       contact: "צור קשר",
       github: "גיטהאב",
+      playground: "Playground",
     },
     home: {
       title: "רון גורפנקל",
@@ -305,6 +308,7 @@ export const translations = {
     footer: {
       tagline: "פתוח להזדמנויות",
       builtWith: "נבנה עם React",
+      siteNav: "דפים באתר",
     },
     a11y: {
       backToTop: "חזרה למעלה",

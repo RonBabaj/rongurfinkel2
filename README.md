@@ -70,7 +70,9 @@ Remote path is configured as **`/public_html/`** in the workflow (adjust there i
 
 The canonical site URL defaults to **`https://rongurfinkel.com`**. For a staging or preview hostname, set **`NEXT_PUBLIC_SITE_URL`** (no trailing slash) so Open Graph links, **`sitemap.xml`**, and **`robots.txt`** use the correct origin.
 
-Build output includes **`/sitemap.xml`** and **`robots.txt`**. After deploy, add the property in [Google Search Console](https://search.google.com/search-console) and submit the sitemap URL (`…/sitemap.xml`).
+Build output includes **`/sitemap.xml`** and **`robots.txt`**, plus **`icon.svg`** for the browser/Google favicon. After deploy, add the property in [Google Search Console](https://search.google.com/search-console), submit **`/sitemap.xml`**, and use **URL Inspection → Request indexing** on the homepage so Google picks up the current title and meta description (old snippets like placeholder Flutter text are usually stale cache).
+
+**Sitelinks** (the extra links under your main result) are chosen automatically by Google; you cannot force them. A clear nav, crawlable internal links (e.g. footer), unique page titles, and the sitemap all help. If wrong links appear, use Search Console to **demote** sitelinks.
 
 ## Requirements
 

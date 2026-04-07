@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Github, Linkedin, Mail } from "lucide-react";
 import { BackToTop } from "./BackToTop";
 import { useLocale } from "@/contexts/LocaleContext";
@@ -18,6 +19,26 @@ export function Footer() {
   return (
     <footer className="border-t border-slate-200/90 dark:border-white/5 mt-auto">
       <div className="page-shell py-6 space-y-4">
+        <nav
+          aria-label={t("footer.siteNav")}
+          className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs font-medium uppercase tracking-wider text-slate-600 dark:text-slate-400"
+        >
+          <Link href="/projects" className="hover:text-brand dark:hover:text-brand transition-colors">
+            {t("nav.projects")}
+          </Link>
+          <Link href="/about" className="hover:text-brand dark:hover:text-brand transition-colors">
+            {t("about.title")}
+          </Link>
+          <Link href="/playground" className="hover:text-brand dark:hover:text-brand transition-colors">
+            {t("nav.playground")}
+          </Link>
+          <Link href="/career" className="hover:text-brand dark:hover:text-brand transition-colors">
+            {t("nav.career")}
+          </Link>
+          <Link href="/contact" className="hover:text-brand dark:hover:text-brand transition-colors">
+            {t("contact.title")}
+          </Link>
+        </nav>
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-500 dark:text-slate-500">
           <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 text-center sm:text-start">
             <span className="text-slate-700 dark:text-slate-400">© {year} Ron Gurfinkel</span>
