@@ -8,6 +8,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    # GitHub job ceiling (FTP-Deploy also has its own `timeout` ms below)
+    timeout-minutes: 30
 
     steps:
       # 1. Checkout repo
@@ -44,11 +46,13 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
+          # Default 30000 ms is too low for clean-slate + many files; raises "Timeout (control socket)"
+          timeout: 600000
           local-dir: ${{ steps.deploy-path.outputs.dir }}
           server-dir: /domains/rongurfinkel.com/public_html/
           dangerous-clean-slate: true
           state-name: .ftp-deploy-sync-state.json
-          exclude: |
+          exclude: 
             **/.git*
             **/.git*/**
             **/node_modules/**
