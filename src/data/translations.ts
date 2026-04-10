@@ -16,7 +16,7 @@ export const translations = {
     },
     home: {
       title: "Ron Gurfinkel",
-      subtitle: "Developer, Designer, Hobbyist Musician",
+      subtitle: "Developer, 3D Tech Designer, Musician",
       summary:
         "Self-motivated developer with strong organizational and interpersonal skills. I like to learn new things, take on responsibility, and grow. Looking for opportunities to apply what I do in the work field and enjoy doing what I love.",
       seeProjects: "See",
@@ -174,7 +174,7 @@ export const translations = {
     },
     home: {
       title: "רון גורפנקל",
-      subtitle: "מפתח, מעצב, מוזיקאי חובב",
+      subtitle: "מפתח, מעצב טכנולוגי תלת־ממדי, מוזיקאי",
       summary:
         "מפתח עצמאי עם כישורים ארגוניים ובין-אישיים חזקים. אוהב ללמוד, לקחת אחריות ולהתפתח. מחפש הזדמנויות ליישם את מה שאני עושה בשטח ולהנות ממה שאני אוהב.",
       seeProjects: "תראו",

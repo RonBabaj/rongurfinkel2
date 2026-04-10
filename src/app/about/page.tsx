@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "About | Ron Gurfinkel",
     description:
-      "Background, approach, and focus — developer and designer building real products.",
+      "Background, approach, and focus — developer, 3D tech designer, and musician building real products.",
     url: "/about",
   },
 };

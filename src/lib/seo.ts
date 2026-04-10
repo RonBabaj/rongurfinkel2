@@ -3,13 +3,13 @@ import { SITE_URL } from "./site";
 
 /** ~155 chars — tuned for Google snippet (distinct from generic Flutter template text). */
 const defaultDescription =
-  "Official portfolio of Ron Gurfinkel: full-stack developer & designer — projects, live demos, career, and contact. React, Flutter, Go, web & mobile. Israel · EN/HE.";
+  "Official portfolio of Ron Gurfinkel: developer, 3D tech designer, and musician — projects, live demos, career, and contact. React, Flutter, Go, web & mobile. Israel · EN/HE.";
 
 export const rootMetadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   applicationName: "Ron Gurfinkel",
   title: {
-    default: "Ron Gurfinkel — Developer, Designer, Hobbyist Musician",
+    default: "Ron Gurfinkel — Developer, 3D Tech Designer, Musician",
     template: "%s | Ron Gurfinkel",
   },
   description: defaultDescription,
@@ -36,13 +36,22 @@ export const rootMetadata: Metadata = {
     alternateLocale: ["he_IL"],
     url: SITE_URL,
     siteName: "Ron Gurfinkel",
-    title: "Ron Gurfinkel — Developer, Designer, Hobbyist Musician",
+    title: "Ron Gurfinkel — Developer, 3D Tech Designer, Musician",
     description: defaultDescription,
+    images: [
+      {
+        url: "/og-thumbnail.png",
+        width: 1200,
+        height: 630,
+        alt: "Ron Gurfinkel — portfolio preview",
+      },
+    ],
   },
   twitter: {
-    card: "summary",
-    title: "Ron Gurfinkel — Developer, Designer, Hobbyist Musician",
+    card: "summary_large_image",
+    title: "Ron Gurfinkel — Developer, 3D Tech Designer, Musician",
     description: defaultDescription,
+    images: ["/og-thumbnail.png"],
   },
   robots: {
     index: true,
