@@ -29,7 +29,7 @@ export function ProjectCard({
   ctaLabelKey,
 }: ProjectCardProps) {
   const { t } = useLocale();
-  const detailHref = detailSlug ? `/playground/${detailSlug}` : undefined;
+  const detailHref = detailSlug ? `/playground/${detailSlug}/` : undefined;
 
   const demoCtaLabel = ctaLabelKey ? t(ctaLabelKey) : t("projectCard.openLiveApp");
 

@@ -13,7 +13,7 @@ export function PlaygroundContent() {
       </p>
       <div className="flex w-full justify-start">
         <Link
-          href="/projects"
+          href="/projects/"
           className="text-brand-dim dark:text-brand hover:text-brand dark:hover:text-brand/90 focus:outline-none focus:ring-2 focus:ring-brand/50 focus:ring-offset-2 focus:ring-offset-slate-50 dark:focus:ring-offset-obsidian rounded"
         >
           <span className="inline-flex items-center gap-1 rtl:flex-row-reverse">

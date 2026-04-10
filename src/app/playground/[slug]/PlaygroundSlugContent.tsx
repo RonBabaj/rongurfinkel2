@@ -26,7 +26,7 @@ export function PlaygroundSlugContent({ item }: PlaygroundSlugContentProps) {
       {/* justify-start: inline-start — LTR left, RTL right (natural back link edge) */}
       <div className="mb-6 flex w-full justify-start">
         <Link
-          href="/projects"
+          href="/projects/"
           className="text-sm text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 inline-flex items-center gap-1.5 rtl:flex-row-reverse transition-colors"
         >
           <ArrowLeft className="w-4 h-4 shrink-0 rtl:rotate-180" aria-hidden />

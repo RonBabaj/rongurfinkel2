@@ -5,12 +5,12 @@ export const metadata: Metadata = {
   title: "About",
   description:
     "About Ron Gurfinkel — background, how I work, and what drives the projects on this site.",
-  alternates: { canonical: "/about" },
+  alternates: { canonical: "/about/" },
   openGraph: {
     title: "About | Ron Gurfinkel",
     description:
       "Background, approach, and focus — developer, 3D tech designer, and musician building real products.",
-    url: "/about",
+    url: "/about/",
   },
 };
 

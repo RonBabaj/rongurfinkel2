@@ -9,11 +9,12 @@ Personal site and project hub built with **Next.js** (App Router), **React 18**,
 - **Bilingual UI** — English and Hebrew via `LocaleContext`; RTL layout and Hebrew typography (`Noto Sans Hebrew`) when the locale is Hebrew.
 - **Themes** — Light and dark modes with system preference and a manual toggle (`ThemeContext` + `ThemeScript` for flash-free first paint).
 - **Landing** — Bento-style home with featured project, quick links, and animated “profile code” hero (`ProfileCodeWindow`).
-- **Projects** — `/projects` with featured and grid cards; data from `src/data/projects.ts`.
-- **Playground** — `/playground` plus dynamic routes for individual demos (`/playground/[slug]`); catalog in `src/data/playground.ts`. Includes embedded experiences where applicable (e.g. Flight Captain under `/playground/flight-captain`).
-- **About** — `/about` for background, skills, and longer-form copy (translations in `src/data/translations.ts`).
-- **Career** — Timeline and role detail live on the **home page** at **`/#career`** (`HomeContent.tsx`; types in `src/types/career.ts`). **`/career`** is a small client redirect to that hash for legacy bookmarks and external links.
-- **Contact** — Contact block on the home page at **`/#contact`**. **`/contact`** redirects to the same hash for legacy URLs.
+- **Projects** — `/projects/` with featured and grid cards; data from `src/data/projects.ts`.
+- **Playground** — `/playground/` plus dynamic routes (`/playground/[slug]/`); catalog in `src/data/playground.ts`. Includes embedded experiences where applicable (e.g. Flight Captain under `/playground/flight-captain/`).
+- **About** — `/about/` for background, skills, and longer-form copy (translations in `src/data/translations.ts`).
+- **Career** — Timeline and role detail live on the **home page** at **`/#career`** (`HomeContent.tsx`; types in `src/types/career.ts`). **`/career/`** is a small client redirect to that hash for legacy bookmarks and external links.
+- **Contact** — Contact block on the home page at **`/#contact`**. **`/contact/`** redirects to the same hash for legacy URLs.
+- **Shared hosting** — `trailingSlash: true` in `next.config.mjs` plus **`public/.htaccess`** (copied into `out/`) so Apache/LiteSpeed serves `*/index.html` for paths like `/projects` without returning **403 Forbidden** when directory listings are disabled.
 - **SEO** — Central metadata in `src/lib/seo.ts`: titles, Open Graph, Twitter card, JSON-LD (`Person` / `WebSite`). **`public/og-thumbnail.png`** is the 1200×630 social preview. **`src/app/sitemap.ts`** and **`src/app/robots.ts`** generate **`/sitemap.xml`** and **`/robots.txt`** at build time. Favicon via **`src/app/icon.svg`**.
 
 ---
@@ -42,9 +43,9 @@ src/
   hooks/               # Hash scroll, RTL helpers
   lib/                 # seo.ts, site URL helpers, misc utilities
   types/               # Shared TS types (e.g. career)
-public/                # Static files (og-thumbnail.png, featured SVGs, …)
+public/                # .htaccess (Apache/LiteSpeed), og-thumbnail.png, featured SVGs, …
 deploy/                # Optional Docker / env examples for other services
-next.config.mjs        # output: "export"
+next.config.mjs        # output: "export", trailingSlash: true
 tailwind.config.ts
 ```
 
@@ -62,6 +63,7 @@ tailwind.config.ts
 
 - **Node.js** — **20.x** recommended (matches GitHub Actions). **18+** generally works with this Next.js line; use the same major version locally and in CI when possible.
 - **npm** — Comes with Node; install dependencies with `npm ci` in CI and `npm install` locally.
+- **Optional SWC binaries** — Next pulls `@next/swc-darwin-arm64` (etc.) as **optional** dependencies. If your npm config uses `omit=optional` / `--no-optional`, Turbopack will fail with `turbo.createProject is not supported by the wasm bindings`. Use **`npm run dev`** (webpack, default here) or reinstall with optional deps, e.g. `npm install --include=optional`.
 
 ---
 
@@ -69,7 +71,8 @@ tailwind.config.ts
 
 | Command        | Purpose |
 | -------------- | ------- |
-| `npm run dev`  | Next.js dev server at [http://localhost:3000](http://localhost:3000) |
+| `npm run dev`  | Dev server (webpack; works even if optional `@next/swc-*` wasn’t installed) |
+| `npm run dev:turbo` | Dev with Turbopack (needs native SWC — run `npm install` **with** optional deps, see below) |
 | `npm run build`| Production build; static files emitted to **`out/`** |
 | `npm run start`| Serves the **non-export** server build (optional; static hosting uses **`out/`** only) |
 | `npm run lint` | `next lint` (ESLint) |
@@ -144,6 +147,10 @@ If uploads still fail:
 
 - Confirm in **hPanel → Files → FTP Accounts** whether you need **`protocol: ftps`** and a specific **port** (add the corresponding `with:` keys to the action per the [action README](https://github.com/SamKirkland/FTP-Deploy-Action)).  
 - Temporarily set **`log-level: verbose`** on the deploy step to see where it stalls.
+
+### 403 on `/projects`, `/about`, etc.
+
+Static export outputs folders such as `out/projects/index.html`. Many shared hosts return **403** for `/projects` if they treat it as a directory, disable **Indexes**, and do not map the request to `index.html`. This repo sets **`trailingSlash: true`** and ships **`public/.htaccess`** into **`out/`** so rewrites and **`DirectoryIndex`** line up with that layout. Ensure **`out/.htaccess`** is actually on the server after FTP (some clients hide dotfiles—confirm in hPanel **File Manager**).
 
 ---
 

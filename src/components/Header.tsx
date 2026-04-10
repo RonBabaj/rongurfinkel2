@@ -13,8 +13,8 @@ const GITHUB = "https://github.com/RonBabaj";
 
 /** Base44: Projects, Skills & Hobbies, Career, Contact — no Home (logo → /). */
 const navLinks = [
-  { href: "/projects", labelKey: "nav.projects" },
-  { href: "/about", labelKey: "nav.skillsHobbies" },
+  { href: "/projects/", labelKey: "nav.projects" },
+  { href: "/about/", labelKey: "nav.skillsHobbies" },
   { href: "/#career", labelKey: "nav.career" },
   { href: "/#contact", labelKey: "nav.contact" },
 ] as const;
@@ -23,7 +23,9 @@ function isNavActive(pathname: string, hash: string, href: string): boolean {
   if (href === "/#career") return pathname === "/" && hash === "#career";
   if (href === "/#contact") return pathname === "/" && hash === "#contact";
   if (href.startsWith("/")) {
-    return pathname === href || pathname.startsWith(`${href}/`);
+    if (pathname === href) return true;
+    const prefix = href.endsWith("/") ? href : `${href}/`;
+    return pathname.startsWith(prefix);
   }
   return false;
 }

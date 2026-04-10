@@ -83,7 +83,7 @@ export function getLandingFeatured(): Project[] {
 }
 
 export function hrefForLandingProject(p: Project): string {
-  if (p.detailSlug) return `/playground/${p.detailSlug}`;
+  if (p.detailSlug) return `/playground/${p.detailSlug}/`;
   if (p.githubUrl) return p.githubUrl;
-  return "/projects";
+  return "/projects/";
 }

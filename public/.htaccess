@@ -1,0 +1,14 @@
+# Static Next.js export on Apache / LiteSpeed (e.g. Hostinger).
+# Without this, `/projects` can 403: server sees a directory but won't list it and may not pick `index.html`.
+
+DirectoryIndex index.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Map `/about` → `about/index.html` when that file exists (same for /projects, etc.)
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME}/index.html -f
+  RewriteRule ^(.*)$ $1/index.html [L]
+</IfModule>

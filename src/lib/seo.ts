@@ -66,11 +66,11 @@ export const rootMetadata: Metadata = {
 
 /** Main crawlable routes — mirrors sitemap; helps crawlers understand site sections (sitelinks are still algorithmic). */
 const SITE_NAV: { name: string; path: string }[] = [
-  { name: "Projects", path: "/projects" },
-  { name: "Skills & Hobbies", path: "/about" },
-  { name: "Playground", path: "/playground" },
-  { name: "Career", path: "/career" },
-  { name: "Contact", path: "/contact" },
+  { name: "Projects", path: "/projects/" },
+  { name: "Skills & Hobbies", path: "/about/" },
+  { name: "Playground", path: "/playground/" },
+  { name: "Career", path: "/career/" },
+  { name: "Contact", path: "/contact/" },
 ];
 
 export function buildJsonLdGraph() {

@@ -74,14 +74,14 @@ export function HomeContent() {
               >
                 {t("home.ctaGetInTouch")}
               </Link>
-              <Link href="/projects" className={`${primaryBtn} rtl:flex-row-reverse`}>
+              <Link href="/projects/" className={`${primaryBtn} rtl:flex-row-reverse`}>
                 {t("home.ctaViewProjects")}
                 <ArrowRight className="w-5 h-5 rtl:rotate-180 shrink-0" aria-hidden />
               </Link>
             </>
           ) : (
             <>
-              <Link href="/projects" className={`${primaryBtn} rtl:flex-row-reverse`}>
+              <Link href="/projects/" className={`${primaryBtn} rtl:flex-row-reverse`}>
                 {t("home.ctaViewProjects")}
                 <ArrowRight className="w-5 h-5 rtl:rotate-180 shrink-0" aria-hidden />
               </Link>
@@ -122,7 +122,7 @@ export function HomeContent() {
             <h2 className="font-sans text-3xl sm:text-4xl font-semibold tracking-tight text-slate-900 dark:text-slate-100">
               {t("home.featuredHeading")}
             </h2>
-            <Link href="/projects" className={linkArrow}>
+            <Link href="/projects/" className={linkArrow}>
               {t("home.viewAll")}
               <span aria-hidden className="inline-block rtl:rotate-180">
                 →
@@ -165,7 +165,7 @@ export function HomeContent() {
         </div>
         <Reveal delayMs={120}>
           <p className="mt-8">
-            <Link href="/about" className={linkArrow}>
+            <Link href="/about/" className={linkArrow}>
               {t("nav.skillsHobbies")}
               <ArrowRight className="w-4 h-4 rtl:rotate-180 shrink-0" aria-hidden />
             </Link>

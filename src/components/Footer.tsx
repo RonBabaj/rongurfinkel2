@@ -23,19 +23,19 @@ export function Footer() {
           aria-label={t("footer.siteNav")}
           className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs font-medium uppercase tracking-wider text-slate-600 dark:text-slate-400"
         >
-          <Link href="/projects" className="hover:text-brand dark:hover:text-brand transition-colors">
+          <Link href="/projects/" className="hover:text-brand dark:hover:text-brand transition-colors">
             {t("nav.projects")}
           </Link>
-          <Link href="/about" className="hover:text-brand dark:hover:text-brand transition-colors">
+          <Link href="/about/" className="hover:text-brand dark:hover:text-brand transition-colors">
             {t("about.title")}
           </Link>
-          <Link href="/playground" className="hover:text-brand dark:hover:text-brand transition-colors">
+          <Link href="/playground/" className="hover:text-brand dark:hover:text-brand transition-colors">
             {t("nav.playground")}
           </Link>
-          <Link href="/career" className="hover:text-brand dark:hover:text-brand transition-colors">
+          <Link href="/career/" className="hover:text-brand dark:hover:text-brand transition-colors">
             {t("nav.career")}
           </Link>
-          <Link href="/contact" className="hover:text-brand dark:hover:text-brand transition-colors">
+          <Link href="/contact/" className="hover:text-brand dark:hover:text-brand transition-colors">
             {t("contact.title")}
           </Link>
         </nav>

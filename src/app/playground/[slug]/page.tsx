@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const item = getPlaygroundItemBySlug(slug);
   if (!item) return {};
 
-  const path = `/playground/${slug}`;
+  const path = `/playground/${slug}/`;
   return {
     title: item.title,
     description: item.shortDescription,

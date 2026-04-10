@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 export default function LegacyFlightCaptainRedirect() {
   const router = useRouter();
   useEffect(() => {
-    router.replace("/playground/fly-fix");
+    router.replace("/playground/fly-fix/");
   }, [router]);
   return (
     <div className="page-shell py-16 font-mono text-sm text-slate-500 dark:text-slate-400">
