@@ -40,12 +40,17 @@ jobs:
           fi
 
       # 5. Deploy via FTP (clean deploy = no nesting issues)
+      # ETIMEDOUT on port 21 = TCP never connects (firewall/host/network). The `timeout:` below does not fix that.
       - name: Deploy to Hostinger via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
+          # If hPanel says "FTP over TLS (explicit)", uncomment:
+          # protocol: ftps
+          # port: 21
+          # security: loose
           # Default 30000 ms is too low for clean-slate + many files; raises "Timeout (control socket)"
           timeout: 600000
           local-dir: ${{ steps.deploy-path.outputs.dir }}

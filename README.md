@@ -148,6 +148,22 @@ If uploads still fail:
 - Confirm in **hPanel → Files → FTP Accounts** whether you need **`protocol: ftps`** and a specific **port** (add the corresponding `with:` keys to the action per the [action README](https://github.com/SamKirkland/FTP-Deploy-Action)).  
 - Temporarily set **`log-level: verbose`** on the deploy step to see where it stalls.
 
+### FTP `connect ETIMEDOUT` (before login)
+
+Errors like **`connect ETIMEDOUT … port 21 (control socket)`** mean the runner **never opens a TCP connection** to the FTP host. That is **not** the same as the long FTP “control socket” timeout during upload—raising `timeout:` in the action **does not fix ETIMEDOUT**.
+
+Typical causes:
+
+- **Path from GitHub’s cloud runners to Hostinger is filtered** (host firewall, DDoS edge, or policy blocking datacenter IP ranges).  
+- **Wrong host** in `FTP_SERVER` (typo or obsolete IP)—still points at something that doesn’t answer on 21.  
+- **Local or regional blocking** of port 21 (rarer from Actions, but possible in combination with routing).
+
+What to try:
+
+1. **Use the FTP hostname from hPanel** (e.g. `ftp.yourdomain.com` or the server name Hostinger shows), not a stale IP, unless support told you otherwise.  
+2. From your **Mac**, test reachability: `nc -vz YOUR_FTP_HOST 21` (or FileZilla). If **your home network** works but **Actions always ETIMEDOUT**, the block is likely **between GitHub and Hostinger**—ask Hostinger support whether FTP from **GitHub Actions** ([published IP ranges](https://api.github.com/meta)) can be allowed, or whether **SFTP/SSH deploy** is available on your plan.  
+3. **Alternatives if FTP from CI stays blocked:** deploy with **[web-deploy](https://github.com/SamKirkland/web-deploy)** over **SSH** (if you have SSH to the account), run a **self-hosted** Actions runner on a network that can reach FTP, or build in CI and upload artifacts / use another host (e.g. object storage + CDN) that Actions can reach.
+
 ### 403 on `/projects`, `/about`, etc.
 
 Static export outputs folders such as `out/projects/index.html`. Many shared hosts return **403** for `/projects` if they treat it as a directory, disable **Indexes**, and do not map the request to `index.html`. This repo sets **`trailingSlash: true`** and ships **`public/.htaccess`** into **`out/`** so rewrites and **`DirectoryIndex`** line up with that layout. Ensure **`out/.htaccess`** is actually on the server after FTP (some clients hide dotfiles—confirm in hPanel **File Manager**).
