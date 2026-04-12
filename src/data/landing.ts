@@ -3,7 +3,7 @@ import type { Project } from "./types";
 
 /**
  * Base44 portfolio order: Fly-Fix first, SpeechInsight second.
- * Display copy matches https://ron-gurfinkel-portfolio-copy-3c9f3b6e.base44.app/ (paths link to your real playground slugs).
+ * Display copy matches https://ron-gurfinkel-portfolio-copy-3c9f3b6e.base44.app/ (card links use live demo or GitHub).
  */
 export const LANDING_FEATURED_IDS = ["fly-fix", "speechinsight2"] as const;
 
@@ -40,7 +40,7 @@ export const landingCardDisplay: Record<
     title: "Personal Portfolio Website",
     previewImage: "/featured/portfolio.svg",
     description:
-      "Static Next.js portfolio: projects, skills, playground demos, i18n, and a cohesive landing experience.",
+      "Static Next.js portfolio: projects, skills, bilingual UI, i18n, and a cohesive landing experience.",
     techTags: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
     stats: [
       { label: "TypeScript", pct: 55 },
@@ -83,7 +83,8 @@ export function getLandingFeatured(): Project[] {
 }
 
 export function hrefForLandingProject(p: Project): string {
-  if (p.detailSlug) return `/playground/${p.detailSlug}/`;
+  if (p.detailSlug) return `/projects/${p.detailSlug}/`;
+  if (p.demoUrl) return p.demoUrl;
   if (p.githubUrl) return p.githubUrl;
   return "/projects/";
 }

@@ -87,7 +87,7 @@ export function CareerJobModal({ job, onClose }: CareerJobModalProps) {
         />
       )}
       <div
-        className={`career-modal-shell pointer-events-auto overflow-hidden flex flex-col border border-slate-300/90 bg-slate-50/95 backdrop-blur-xl dark:border-white/[0.1] dark:bg-[#0f172a]/95 transition-[border-radius,box-shadow] duration-300 ease-out ${
+        className={`career-modal-shell pointer-events-auto overflow-hidden flex flex-col border border-slate-200/95 bg-white/95 backdrop-blur-xl dark:border-white/[0.1] dark:bg-[#0f172a]/95 transition-[border-radius,box-shadow] duration-300 ease-out ${
           fullscreen
             ? "relative z-10 flex-1 min-h-0 w-full max-w-none rounded-none shadow-2xl shadow-black/50 dark:shadow-black/70"
             : "relative z-10 w-full max-w-lg rounded-2xl shadow-2xl shadow-black/40 dark:shadow-black/60"
@@ -97,7 +97,7 @@ export function CareerJobModal({ job, onClose }: CareerJobModalProps) {
         onAnimationEnd={onPanelAnimationEnd}
       >
         <div
-          className="flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 border-b border-slate-200/90 dark:border-white/[0.08] bg-slate-100/90 dark:bg-black/40 shrink-0"
+          className="flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 border-b border-slate-200/90 dark:border-white/[0.08] bg-slate-50/95 dark:bg-black/40 shrink-0"
           dir="ltr"
         >
           <div className="flex items-center gap-1 shrink-0">

@@ -2,7 +2,7 @@ import type { Project } from "./types";
 
 /**
  * Single source for all real projects. CV-aligned; no mockups.
- * Projects with detailSlug have a dedicated page at /playground/[slug].
+ * Cards link to live demos, GitHub, and `/projects/[detailSlug]/` when `detailSlug` is set.
  */
 export const projects: Project[] = [
   {
@@ -26,7 +26,7 @@ export const projects: Project[] = [
     detailSlug: "fly-fix",
     status: "live",
     demoUrl: "https://fly-fix.com",
-    ctaLabelKey: "playground.openWebsite",
+    ctaLabelKey: "projectCard.openWebsite",
   },
   {
     id: "pig-clicker-farm",
@@ -42,11 +42,11 @@ export const projects: Project[] = [
     id: "portfolio",
     title: "Personal Portfolio Website",
     description:
-      "This site: a static Next.js portfolio with projects, skills, and a future-proof playground for live demos.",
+      "This site: a static Next.js portfolio with projects, skills, bilingual UI, and a cohesive light/dark theme.",
     tech: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
     detailSlug: "portfolio",
     status: "live",
     demoUrl: "https://rongurfinkel.com",
-    ctaLabelKey: "playground.openWebsite",
+    ctaLabelKey: "projectCard.openWebsite",
   },
 ];

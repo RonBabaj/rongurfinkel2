@@ -25,7 +25,7 @@ export function SectionMarker({
   return (
     <p
       dir={dir}
-      className={`font-mono text-xs sm:text-sm text-brand/90 dark:text-brand/80 tracking-wide uppercase ${alignClass} isolate [unicode-bidi:isolate] ${className}`}
+      className={`font-mono text-xs sm:text-sm text-teal-800 dark:text-brand/80 tracking-wide uppercase ${alignClass} isolate [unicode-bidi:isolate] ${className}`}
     >
       {children}
     </p>

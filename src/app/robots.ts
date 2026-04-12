@@ -9,7 +9,6 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/playground/flight-captain/"],
     },
     sitemap: absoluteUrl("/sitemap.xml"),
     host: SITE_URL,

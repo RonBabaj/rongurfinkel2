@@ -11,17 +11,18 @@ export interface Project {
   tech: string[];
   githubUrl?: string;
   image?: string;
-  /** When set, card links to /playground/[detailSlug] for full detail (e.g. SpeechInsight2). */
+  /** When set, "View details" links to `/projects/[detailSlug]/`. */
   detailSlug?: string;
   /** Status badge on Projects page; only for items that have a demo/deploy story (e.g. deployable-phase2). */
   status?: DemoStatus;
   /** When live: URL of the deployed app (opens in new tab). */
   demoUrl?: string;
-  /** Translation key for demo CTA (e.g. "playground.openWebsite"). */
+  /** Translation key for demo CTA (e.g. "projectCard.openWebsite"). */
   ctaLabelKey?: string;
 }
 
-export interface PlaygroundItem {
+/** Long-form project page (`/projects/[slug]/`). */
+export interface ProjectDetail {
   id: string;
   slug: string;
   title: string;
@@ -33,12 +34,8 @@ export interface PlaygroundItem {
   architecture?: string;
   stack?: string[];
   screenshotPlaceholder?: boolean;
-  /** When live: URL of the deployed app (or external product link). */
   demoUrl?: string;
-  /** Translation key for primary CTA (e.g. "playground.openWebsite"). */
   ctaLabelKey?: string;
-  /** Example command/output pairs for a "fake terminal" preview. */
   commandPreview?: { input: string; output: string }[];
-  /** Custom ASCII/code-block diagram for the architecture section (project-specific). */
   architectureDiagram?: string;
 }

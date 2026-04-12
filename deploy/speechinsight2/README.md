@@ -47,7 +47,7 @@ Get the API key from Render Dashboard → Account → API Keys. Get the Service 
 Set the live URL in the **website** repo:
 
 - `src/data/projects.ts` → SpeechInsight2 `demoUrl`
-- `src/data/playground.ts` → SpeechInsight2 `demoUrl`
+- `src/data/projects.ts` → SpeechInsight2 `demoUrl`
 - Set `status` to `"live"` for both.
 
 Then the site will show “Live” and “Open live app” with the real URL.

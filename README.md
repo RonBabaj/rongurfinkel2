@@ -7,10 +7,9 @@ Personal site and project hub built with **Next.js** (App Router), **React 18**,
 ## Features
 
 - **Bilingual UI** — English and Hebrew via `LocaleContext`; RTL layout and Hebrew typography (`Noto Sans Hebrew`) when the locale is Hebrew.
-- **Themes** — Light and dark modes with system preference and a manual toggle (`ThemeContext` + `ThemeScript` for flash-free first paint).
+- **Themes** — Light and dark modes with system preference and a manual toggle (`ThemeContext` + `ThemeScript` for flash-free first paint). Light mode uses the **same grid/bloom structure** as dark, with a **soft off-white canvas**, **high-contrast body text**, **deep teal labels** (instead of neon teal on gray), and a **light `profile.js` panel** so the switch feels natural, not a different site.
 - **Landing** — Bento-style home with featured project, quick links, and animated “profile code” hero (`ProfileCodeWindow`).
-- **Projects** — `/projects/` with featured and grid cards; data from `src/data/projects.ts`.
-- **Playground** — `/playground/` plus dynamic routes (`/playground/[slug]/`); catalog in `src/data/playground.ts`. Includes embedded experiences where applicable (e.g. Flight Captain under `/playground/flight-captain/`).
+- **Projects** — `/projects/` lists the catalog; **`/projects/[slug]/`** holds long-form write-ups (overview, architecture, stack). Featured cards on the home page link to the detail URL when `detailSlug` is set. Data: `src/data/projects.ts` + `src/data/projectDetails.ts`.
 - **About** — `/about/` for background, skills, and longer-form copy (translations in `src/data/translations.ts`).
 - **Career** — Timeline and role detail live on the **home page** at **`/#career`** (`HomeContent.tsx`; types in `src/types/career.ts`). **`/career/`** is a small client redirect to that hash for legacy bookmarks and external links.
 - **Contact** — Contact block on the home page at **`/#contact`**. **`/contact/`** redirects to the same hash for legacy URLs.
@@ -36,25 +35,41 @@ Personal site and project hub built with **Next.js** (App Router), **React 18**,
 ```text
 .github/workflows/   # CI: build + FTP deploy to Hostinger
 src/
-  app/                 # Routes, layouts, globals.css, sitemap, robots, icon
-  components/          # Header, Footer, cards, modals, cursor, etc.
+  app/                 # App Router: page.tsx per route, layouts, globals.css, sitemap, robots, icon
+    projects/
+      page.tsx         # Project catalog
+      [slug]/          # Long-form project detail pages (static params from projectDetails)
+  components/          # Header, Footer, cards, modals, cursor, ProfileCodeWindow, …
   contexts/            # Theme, locale
-  data/                # projects, playground, translations, profile code segments
-  hooks/               # Hash scroll, RTL helpers
-  lib/                 # seo.ts, site URL helpers, misc utilities
-  types/               # Shared TS types (e.g. career)
+  data/                # projects, projectDetails, translations, landing, careerJobs, profile segments, …
+  hooks/               # Hash scroll, RTL, typewriter, …
+  lib/                 # seo.ts, site URL helpers, …
+  types/               # Shared TS types (career, projects, …)
 public/                # .htaccess (Apache/LiteSpeed), og-thumbnail.png, featured SVGs, …
 deploy/                # Optional Docker / env examples for other services
-next.config.mjs        # output: "export", trailingSlash: true
+next.config.mjs        # static export, trailingSlash, dev webpack memory cache (see below)
 tailwind.config.ts
 ```
 
+### Main URLs
+
+| Path | What it is |
+| ---- | ---------- |
+| `/` | Landing (hero, featured work, stack, career, contact) |
+| `/projects/` | Full project grid (same cards as featured, with previews) |
+| `/projects/[slug]/` | Detail page: overview, architecture, stack, links (slugs in `projectDetails.ts`) |
+| `/about/` | Skills & hobbies |
+| `/career/`, `/contact/` | Client redirect to `/#career` and `/#contact` for legacy links |
+
+Featured cards on the home page use **`hrefForLandingProject()`** in `src/data/landing.ts`: if a project has **`detailSlug`**, the card links to **`/projects/{detailSlug}/`** first; otherwise **`demoUrl`**, then **GitHub**, then **`/projects/`**.
+
 **Where to edit content**
 
-- **Site-wide copy / nav labels / subtitles** — `src/data/translations.ts`
-- **Projects list** — `src/data/projects.ts`
-- **Playground items** — `src/data/playground.ts`
-- **Hero “profile.js” strings** — `src/data/profileCodeSegments.ts` (keep `PROFILE_CODE_PLAIN` in sync for screen readers)
+- **Site-wide copy / nav labels / subtitles** — `src/data/translations.ts` (including **`projectDetail.*`** for detail-page headings)
+- **Project cards (title, blurb, tech, links, `detailSlug`)** — `src/data/projects.ts`
+- **Long-form project pages** — `src/data/projectDetails.ts` (must stay in sync with **`detailSlug`** / slugs)
+- **Featured order & card chrome** — `src/data/landing.ts`
+- **Hero “profile.js” strings** — `src/data/profileCodeSegments.ts` (keep **`PROFILE_CODE_PLAIN`** in sync for screen readers)
 - **Canonical URL, OG defaults** — `src/lib/site.ts`, `src/lib/seo.ts`
 
 ---
@@ -93,6 +108,12 @@ npm run build
 ```
 
 Open **`out/index.html`** via a static server if you want to verify the export (e.g. `npx serve out`).
+
+### Dev: webpack cache / `ENOENT` on `.pack.gz`
+
+`next.config.mjs` sets **`webpack(config, { dev })`** so that when **`dev`** is true, **`config.cache = { type: "memory" }`** — development does **not** use disk packs under **`.next/dev/cache/webpack/`**. That avoids **`ENOENT`** / **`unhandledRejection`** when pack files go missing (Fast Refresh, deleting **`.next`** while `next dev` runs, or sync tools touching the cache).
+
+If the dev server ever acts odd, stop it, run **`rm -rf .next`**, then **`npm run dev`** again. Do not run two **`next dev`** processes on the same repo path at once.
 
 ---
 
@@ -167,6 +188,8 @@ What to try:
 ### 403 on `/projects`, `/about`, etc.
 
 Static export outputs folders such as `out/projects/index.html`. Many shared hosts return **403** for `/projects` if they treat it as a directory, disable **Indexes**, and do not map the request to `index.html`. This repo sets **`trailingSlash: true`** and ships **`public/.htaccess`** into **`out/`** so rewrites and **`DirectoryIndex`** line up with that layout. Ensure **`out/.htaccess`** is actually on the server after FTP (some clients hide dotfiles—confirm in hPanel **File Manager**).
+
+Detail pages are emitted as **`out/projects/<slug>/index.html`** (e.g. `fly-fix`, `speechinsight2`). There is **no** `/playground/` route anymore; old bookmarks to **`/playground/...`** need **redirect rules** on the host if you still want them to work.
 
 ---
 

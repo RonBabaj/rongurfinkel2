@@ -68,7 +68,6 @@ export const rootMetadata: Metadata = {
 const SITE_NAV: { name: string; path: string }[] = [
   { name: "Projects", path: "/projects/" },
   { name: "Skills & Hobbies", path: "/about/" },
-  { name: "Playground", path: "/playground/" },
   { name: "Career", path: "/career/" },
   { name: "Contact", path: "/contact/" },
 ];

@@ -63,7 +63,7 @@ Details and example YAML live in `deploy/speechinsight2/` (for copy into the Spe
 
 ## 5. Website integration
 
-- **Projects & Playground**: SpeechInsight2 status set to **Live**; add **demoUrl** pointing to the Render URL.
+- **Projects**: SpeechInsight2 status set to **Live**; add **demoUrl** pointing to the Render URL.
 - **Copy**: “This is the real running service — not a demo.” and a clear “Open live app” link.
 - **No embedding**: The site stays a hub; we link out to the app, we do not reimplement or wrap the UI in React.
 
@@ -74,7 +74,7 @@ Details and example YAML live in `deploy/speechinsight2/` (for copy into the Spe
 1. **In the SpeechInsight2 repo**: Copy the contents of `deploy/speechinsight2/` (Dockerfile, docker-compose, Caddy/nginx config, start script, env example). Adjust paths if your repo layout differs (e.g. `Api` vs `Backend`, `UI` vs `Client`).
 2. **Render**: Create a Web Service from “Docker”; connect the SpeechInsight2 GitHub repo; set root directory and env vars; note the service URL and Service ID for GitHub Actions if you use API-triggered deploy.
 3. **GitHub**: Add `RENDER_API_KEY` and `RENDER_SERVICE_ID` to the SpeechInsight2 repo secrets if using the provided workflow.
-4. **Website**: Set `demoUrl` in `src/data/projects.ts` and `src/data/playground.ts` to your live Render URL (e.g. `https://speechinsight2.onrender.com`).
+4. **Website**: Set `demoUrl` in `src/data/projects.ts` to your live Render URL (e.g. `https://speechinsight2.onrender.com`).
 
 After that, push to `main` → build runs → deploy runs → app is live; the website already shows “Live” and links to it.
 

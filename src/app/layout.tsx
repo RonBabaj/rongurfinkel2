@@ -28,7 +28,7 @@ const notoSansHebrew = Noto_Sans_Hebrew({
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#dce3ec" },
+    { media: "(prefers-color-scheme: light)", color: "#e8edf4" },
     { media: "(prefers-color-scheme: dark)", color: "#000000" },
   ],
 };

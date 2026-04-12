@@ -1,13 +1,11 @@
-import type { PlaygroundItem } from "./types";
+import type { ProjectDetail } from "./types";
 
-/**
- * Playground hub: real services only. Phase 1 has no live backends.
- * status distinguishes Live / Offline / On-Demand / Deployable · Live in Phase 2.
- * Phase 2: add demoUrl and optional "Open demo" / embed.
- */
 const FLY_FIX_WEB = "https://fly-fix.com";
 
-export const playgroundItems: PlaygroundItem[] = [
+/**
+ * Extended copy for `/projects/[slug]/`. Slugs align with `projects[].detailSlug`.
+ */
+export const projectDetails: ProjectDetail[] = [
   {
     id: "fly-fix",
     slug: "fly-fix",
@@ -16,7 +14,7 @@ export const playgroundItems: PlaygroundItem[] = [
       "Skyscanner-style flight metasearch: Go API (Amadeus, Duffel, Google Flights) + Expo web & mobile. Live site with search, monthly deals, and booking redirects.",
     status: "live",
     demoUrl: FLY_FIX_WEB,
-    ctaLabelKey: "playground.openWebsite",
+    ctaLabelKey: "projectCard.openWebsite",
     githubUrl: "https://github.com/RonBabaj/flight_captain-react",
     tech: ["Go", "TypeScript", "Expo", "React Native", "Amadeus API", "Duffel API"],
     overview:
@@ -101,13 +99,13 @@ export const playgroundItems: PlaygroundItem[] = [
     slug: "portfolio",
     title: "Personal Portfolio Website",
     shortDescription:
-      "This Next.js site: landing, projects, playground detail pages, i18n (EN/HE), RTL, and theme toggle — static-first.",
+      "This Next.js site: landing, project detail pages, i18n (EN/HE), RTL, and theme toggle — static-first.",
     status: "live",
     demoUrl: "https://rongurfinkel.com",
-    ctaLabelKey: "playground.openWebsite",
+    ctaLabelKey: "projectCard.openWebsite",
     tech: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
     overview:
-      "A static-friendly portfolio built with the App Router: home with featured work, career timeline, contact form (mailto flow), and per-project playground pages. Styling uses Tailwind with a cohesive light/dark theme and Hebrew RTL support alongside English.",
+      "A static-friendly portfolio built with the App Router: home with featured work, career timeline, contact form (mailto flow), and per-project detail pages under /projects. Styling uses Tailwind with a cohesive light/dark theme and Hebrew RTL support alongside English.",
     architecture:
       "Next.js layouts wrap shared header/footer. Content is driven by typed data modules (projects, translations). Client components handle theme, locale, hash navigation, and interactive sections; pages are prerendered where possible.",
     architectureDiagram: `┌──────────────┐     ┌─────────────────┐
@@ -115,14 +113,14 @@ export const playgroundItems: PlaygroundItem[] = [
 └──────┬───────┘     └─────────────────┘
        │
        ├──► /  (HomeContent)
-       ├──► /projects
-       ├──► /playground/[slug]  ◄── project detail
+       ├──► /projects/
+       ├──► /projects/[slug]  ◄── project detail
        └──► i18n + Theme providers (client)`,
     stack: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
     commandPreview: [
       {
-        input: "pnpm build && pnpm start",
-        output: "Static routes + playground slugs from generateStaticParams",
+        input: "pnpm build && deploy out/",
+        output: "Static routes + project detail slugs from generateStaticParams",
       },
       {
         input: "Locale: en ↔ he",
@@ -132,8 +130,8 @@ export const playgroundItems: PlaygroundItem[] = [
   },
 ];
 
-const bySlug = new Map(playgroundItems.map((p) => [p.slug, p]));
+const bySlug = new Map(projectDetails.map((p) => [p.slug, p]));
 
-export function getPlaygroundItemBySlug(slug: string): PlaygroundItem | undefined {
+export function getProjectDetailBySlug(slug: string): ProjectDetail | undefined {
   return bySlug.get(slug);
 }

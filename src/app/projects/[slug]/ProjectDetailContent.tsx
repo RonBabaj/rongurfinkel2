@@ -2,18 +2,20 @@
 
 import Link from "next/link";
 import { ArrowLeft, ExternalLink, Github } from "lucide-react";
-import type { PlaygroundItem } from "@/data/types";
+import type { ProjectDetail } from "@/data/types";
 import { StatusBadge } from "@/components/StatusBadge";
 import { useLocale } from "@/contexts/LocaleContext";
 
-interface PlaygroundSlugContentProps {
-  item: PlaygroundItem;
+interface ProjectDetailContentProps {
+  item: ProjectDetail;
 }
 
-export function PlaygroundSlugContent({ item }: PlaygroundSlugContentProps) {
+export function ProjectDetailContent({ item }: ProjectDetailContentProps) {
   const { t } = useLocale();
 
-  const primaryCtaLabel = item.ctaLabelKey ? t(item.ctaLabelKey) : t("playground.openLiveApp");
+  const primaryCtaLabel = item.ctaLabelKey
+    ? t(item.ctaLabelKey)
+    : t("projectDetail.openLiveApp");
 
   const sectionHeading = "text-lg font-medium text-slate-800 dark:text-slate-200 mb-2";
   const bodyText = "text-slate-600 dark:text-slate-400 leading-relaxed";
@@ -23,14 +25,13 @@ export function PlaygroundSlugContent({ item }: PlaygroundSlugContentProps) {
 
   return (
     <div className="page-shell py-12 sm:py-16">
-      {/* justify-start: inline-start — LTR left, RTL right (natural back link edge) */}
       <div className="mb-6 flex w-full justify-start">
         <Link
           href="/projects/"
           className="text-sm text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 inline-flex items-center gap-1.5 rtl:flex-row-reverse transition-colors"
         >
           <ArrowLeft className="w-4 h-4 shrink-0 rtl:rotate-180" aria-hidden />
-          {t("playground.backToProjects")}
+          {t("projectDetail.backToProjects")}
         </Link>
       </div>
 
@@ -47,7 +48,7 @@ export function PlaygroundSlugContent({ item }: PlaygroundSlugContentProps) {
               href={item.demoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center rtl:flex-row-reverse gap-2 rounded-lg border border-brand-dim/50 bg-brand/15 px-4 py-2 text-sm font-medium text-brand-dim dark:text-brand hover:bg-brand/25 transition-colors focus:outline-none focus:ring-2 focus:ring-brand/50 focus:ring-offset-2 focus:ring-offset-slate-50 dark:focus:ring-offset-obsidian"
+              className="inline-flex items-center rtl:flex-row-reverse gap-2 rounded-lg border border-brand-dim/50 bg-brand/15 px-4 py-2 text-sm font-medium text-brand-dim dark:text-brand hover:bg-brand/25 transition-colors focus:outline-none focus:ring-2 focus:ring-brand/50 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-obsidian"
             >
               <ExternalLink className="w-4 h-4 shrink-0" aria-hidden />
               {primaryCtaLabel}
@@ -58,10 +59,10 @@ export function PlaygroundSlugContent({ item }: PlaygroundSlugContentProps) {
               href={item.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center rtl:flex-row-reverse gap-2 rounded-lg border border-slate-300 dark:border-white/10 bg-slate-100 dark:bg-midnight/60 px-4 py-2 text-sm font-medium text-slate-800 dark:text-slate-100 hover:bg-slate-200 dark:hover:bg-midnight hover:border-slate-400 dark:hover:border-white/15 transition-colors focus:outline-none focus:ring-2 focus:ring-brand/50 focus:ring-offset-2 focus:ring-offset-slate-50 dark:focus:ring-offset-obsidian"
+              className="inline-flex items-center rtl:flex-row-reverse gap-2 rounded-lg border border-slate-300 dark:border-white/10 bg-slate-100 dark:bg-midnight/60 px-4 py-2 text-sm font-medium text-slate-800 dark:text-slate-100 hover:bg-slate-200 dark:hover:bg-midnight hover:border-slate-400 dark:hover:border-white/15 transition-colors focus:outline-none focus:ring-2 focus:ring-brand/50 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-obsidian"
             >
               <Github className="w-4 h-4 shrink-0" aria-hidden />
-              {t("playground.viewOnGitHub")}
+              {t("projectDetail.viewOnGitHub")}
             </a>
           )}
         </div>
@@ -69,12 +70,12 @@ export function PlaygroundSlugContent({ item }: PlaygroundSlugContentProps) {
 
       {item.commandPreview && item.commandPreview.length > 0 && (
         <section className="mb-8">
-          <h2 className={sectionHeading}>{t("playground.tryCommands")}</h2>
+          <h2 className={sectionHeading}>{t("projectDetail.tryCommands")}</h2>
           <div className={`${boxClass} space-y-0`}>
             <pre className="m-0 p-0 bg-transparent text-inherit">
               {item.commandPreview.map(({ input, output }, i) => (
                 <span key={i} className="block">
-                  <span className="text-brand-dim dark:text-brand">$</span> {input}
+                  <span className="text-teal-800 dark:text-brand">$</span> {input}
                   {"\n"}
                   <span className="text-slate-500 dark:text-slate-500">
                     → {output.split("\n").join("\n  ")}
@@ -89,14 +90,14 @@ export function PlaygroundSlugContent({ item }: PlaygroundSlugContentProps) {
 
       {item.overview && (
         <section className="mb-8">
-          <h2 className={sectionHeading}>{t("playground.overview")}</h2>
+          <h2 className={sectionHeading}>{t("projectDetail.overview")}</h2>
           <p className={bodyText}>{item.overview}</p>
         </section>
       )}
 
       {item.architecture && (
         <section className="mb-8">
-          <h2 className={sectionHeading}>{t("playground.architecture")}</h2>
+          <h2 className={sectionHeading}>{t("projectDetail.architecture")}</h2>
           <p className={`${bodyText} mb-4`}>{item.architecture}</p>
           {item.architectureDiagram && (
             <div className={boxClass}>
@@ -108,16 +109,16 @@ export function PlaygroundSlugContent({ item }: PlaygroundSlugContentProps) {
 
       {item.screenshotPlaceholder && !item.demoUrl && (
         <section className="mb-8">
-          <h2 className={sectionHeading}>{t("playground.demoSection")}</h2>
+          <h2 className={sectionHeading}>{t("projectDetail.demoSection")}</h2>
           <div className="rounded-xl border border-dashed border-slate-300 dark:border-white/10 bg-slate-50/50 dark:bg-midnight/40 flex items-center justify-center min-h-[200px] text-slate-500 dark:text-slate-500 text-sm">
-            {t("playground.demoSectionPlaceholder")}
+            {t("projectDetail.demoSectionPlaceholder")}
           </div>
         </section>
       )}
 
       {item.stack && item.stack.length > 0 && (
         <section className="mb-8">
-          <h2 className={sectionHeading}>{t("playground.techStack")}</h2>
+          <h2 className={sectionHeading}>{t("projectDetail.techStack")}</h2>
           <ul className="flex flex-wrap gap-2">
             {item.stack.map((s) => (
               <li key={s} className={tagClass}>

@@ -12,7 +12,6 @@ export const translations = {
       contact: "Contact",
       /** Header GitHub pill (desktop) */
       github: "GitHub",
-      playground: "Playground",
     },
     home: {
       title: "Ron Gurfinkel",
@@ -104,6 +103,7 @@ export const translations = {
     },
     projectCard: {
       openLiveApp: "Open live app",
+      openWebsite: "Open website",
       viewDetails: "View details",
       github: "GitHub",
     },
@@ -113,20 +113,16 @@ export const translations = {
       "on-demand": "On-Demand",
       "deployable-phase2": "Deployable · Live in Phase 2",
     },
-    playground: {
+    projectDetail: {
       backToProjects: "Projects",
       viewOnGitHub: "View on GitHub",
       openLiveApp: "Open live app",
-      openWebsite: "Open website",
-      openInTelegram: "Open in Telegram",
       tryCommands: "Example flows",
       overview: "Overview",
       architecture: "Architecture",
       demoSection: "Demo UI",
       demoSectionPlaceholder: "Demo UI (Phase 2)",
       techStack: "Technology stack",
-      goToProjects: "Go to Projects",
-      projectsAndDemos: "Projects and demos now live in one place.",
     },
     about: {
       title: "Skills & Hobbies",
@@ -170,7 +166,6 @@ export const translations = {
       career: "קריירה",
       contact: "צור קשר",
       github: "גיטהאב",
-      playground: "Playground",
     },
     home: {
       title: "רון גורפנקל",
@@ -261,6 +256,7 @@ export const translations = {
     },
     projectCard: {
       openLiveApp: "לפתוח אפליקציה",
+      openWebsite: "פתיחת האתר",
       viewDetails: "פרטים",
       github: "GitHub",
     },
@@ -270,20 +266,16 @@ export const translations = {
       "on-demand": "בהזמנה",
       "deployable-phase2": "פריסה · חי בשלב 2",
     },
-    playground: {
+    projectDetail: {
       backToProjects: "פרויקטים",
       viewOnGitHub: "צפה ב-GitHub",
       openLiveApp: "לפתוח אפליקציה",
-      openWebsite: "פתיחת האתר",
-      openInTelegram: "לפתוח בטלגרם",
       tryCommands: "דוגמאות שימוש",
       overview: "סקירה",
       architecture: "ארכיטקטורה",
       demoSection: "ממשק דמו",
       demoSectionPlaceholder: "ממשק דמו (שלב 2)",
       techStack: "מחסנית טכנולוגיה",
-      goToProjects: "לעמוד הפרויקטים",
-      projectsAndDemos: "פרויקטים ודemos במקום אחד.",
     },
     about: {
       title: "כישורים ותחביבים",

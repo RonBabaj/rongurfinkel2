@@ -32,7 +32,7 @@ function LanguageBars({ stats }: { stats: { label: string; pct: number }[] }) {
 }
 
 const cardClassName =
-  "group glass-card relative flex flex-col overflow-hidden rounded-xl transition-all duration-500 ease-out hover:-translate-y-[6px] hover:border-brand/45 hover:shadow-[0_16px_48px_-14px_rgba(45,212,191,0.28)] dark:hover:border-brand/50 dark:hover:shadow-[0_0_44px_-6px_rgba(45,212,191,0.35)] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/50 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50 dark:focus-visible:ring-offset-black active:scale-[0.99]";
+  "group glass-card relative flex flex-col overflow-hidden rounded-xl transition-all duration-500 ease-out hover:-translate-y-[6px] hover:border-brand/45 hover:shadow-[0_16px_48px_-14px_rgba(45,212,191,0.28)] dark:hover:border-brand/50 dark:hover:shadow-[0_0_44px_-6px_rgba(45,212,191,0.35)] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/50 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-black active:scale-[0.99]";
 
 export function LandingFeaturedCard({ project }: LandingFeaturedCardProps) {
   const { isRTL } = useLocale();

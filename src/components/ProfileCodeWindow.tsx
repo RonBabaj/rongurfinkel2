@@ -37,8 +37,8 @@ export function ProfileCodeWindow() {
   const codeBody = useMemo(() => renderVisibleSegments(visible), [visible]);
 
   return (
-    <div className="group/profile code-hero-window relative rounded-2xl border border-slate-300/90 bg-[#0f172a] shadow-2xl shadow-black/50 transition-all duration-700 ease-out dark:border-white/[0.08] dark:bg-[#0f172a] max-w-[44rem] w-full overflow-hidden hover:border-emerald-400/40 hover:shadow-[0_0_80px_-24px_rgba(46,230,212,0.22)] dark:hover:border-emerald-400/45 dark:hover:shadow-[0_0_100px_-20px_rgba(46,230,212,0.2)]">
-      <div className="flex items-center gap-2.5 px-4 py-3 sm:px-5 sm:py-3.5 border-b border-white/[0.06] bg-black/25">
+    <div className="group/profile code-hero-window relative rounded-2xl border border-slate-200/95 bg-slate-50 shadow-xl shadow-slate-900/10 transition-all duration-700 ease-out max-w-[44rem] w-full overflow-hidden hover:border-teal-500/35 hover:shadow-[0_0_60px_-20px_rgba(13,148,136,0.2)] dark:border-white/[0.08] dark:bg-[#0f172a] dark:shadow-2xl dark:shadow-black/50 dark:hover:border-emerald-400/45 dark:hover:shadow-[0_0_100px_-20px_rgba(46,230,212,0.2)]">
+      <div className="flex items-center gap-2.5 px-4 py-3 sm:px-5 sm:py-3.5 border-b border-slate-200/90 bg-slate-100/90 dark:border-white/[0.06] dark:bg-black/25">
         <span className="flex gap-2" aria-hidden>
           <span className="h-3 w-3 rounded-full bg-[#ff5f57] sm:h-3.5 sm:w-3.5" />
           <span className="h-3 w-3 rounded-full bg-[#febc2e] sm:h-3.5 sm:w-3.5" />
@@ -49,7 +49,7 @@ export function ProfileCodeWindow() {
         </span>
       </div>
       <pre
-        className="profile-code-body m-0 min-h-[min(48vh,22rem)] p-4 sm:p-6 sm:min-h-[24rem] font-mono text-[12px] sm:text-[14px] leading-[1.65] text-start overflow-x-auto"
+        className="profile-code-body m-0 min-h-[min(48vh,22rem)] p-4 sm:p-6 sm:min-h-[24rem] font-mono text-[12px] sm:text-[14px] leading-[1.65] text-start overflow-x-auto bg-white text-slate-800 dark:bg-transparent"
         dir="ltr"
       >
         <code className="text-[12px] sm:text-[14px] font-mono" aria-hidden="true">

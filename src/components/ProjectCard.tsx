@@ -14,7 +14,7 @@ interface ProjectCardProps {
   detailSlug?: string;
   status?: DemoStatus;
   demoUrl?: string;
-  /** e.g. "playground.openWebsite" or "projectCard.openLiveApp" (default) */
+  /** e.g. "projectCard.openWebsite" or "projectCard.openLiveApp" (default) */
   ctaLabelKey?: string;
 }
 
@@ -29,15 +29,15 @@ export function ProjectCard({
   ctaLabelKey,
 }: ProjectCardProps) {
   const { t } = useLocale();
-  const detailHref = detailSlug ? `/playground/${detailSlug}/` : undefined;
+  const detailHref = detailSlug ? `/projects/${detailSlug}/` : undefined;
 
   const demoCtaLabel = ctaLabelKey ? t(ctaLabelKey) : t("projectCard.openLiveApp");
 
   const cardClass =
-    "glass-card block p-4 sm:p-5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-teal-500/5 dark:hover:shadow-brand/10 hover:border-brand/25 dark:hover:border-teal-400/20 group focus-within:ring-2 focus-within:ring-brand/40 focus-within:ring-offset-2 focus-within:ring-offset-slate-50 dark:focus-within:ring-offset-obsidian outline-none";
+    "glass-card block p-4 sm:p-5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-teal-500/5 dark:hover:shadow-brand/10 hover:border-brand/25 dark:hover:border-teal-400/20 group focus-within:ring-2 focus-within:ring-brand/40 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-obsidian outline-none";
 
   const linkClass =
-    "inline-flex items-center rtl:flex-row-reverse gap-1.5 text-brand-dim dark:text-brand hover:text-brand dark:hover:text-brand/90 focus:outline-none focus:ring-2 focus:ring-brand/50 focus:ring-offset-2 focus:ring-offset-slate-50 dark:focus:ring-offset-obsidian rounded font-medium transition-colors";
+    "inline-flex items-center rtl:flex-row-reverse gap-1.5 text-brand-dim dark:text-brand hover:text-brand dark:hover:text-brand/90 focus:outline-none focus:ring-2 focus:ring-brand/50 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-obsidian rounded font-medium transition-colors";
 
   return (
     <div className={cardClass}>

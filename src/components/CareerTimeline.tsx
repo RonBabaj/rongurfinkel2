@@ -20,7 +20,7 @@ function CareerEntryCard({
     <button
       type="button"
       onClick={onOpen}
-      className="group/card career-card relative w-full text-start overflow-hidden rounded-xl border border-brand/25 bg-slate-100/90 p-5 shadow-sm backdrop-blur-sm transition-all duration-500 ease-out dark:border-brand/35 dark:bg-[rgba(15,23,42,0.55)] hover:-translate-y-1.5 hover:border-brand/50 hover:shadow-[0_0_40px_-10px_rgba(45,212,191,0.38)] dark:hover:border-brand/50 dark:hover:shadow-[0_0_48px_-10px_rgba(45,212,191,0.28)] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/50 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-200/90 dark:focus-visible:ring-offset-obsidian cursor-pointer"
+      className="group/card career-card relative w-full text-start overflow-hidden rounded-xl border border-slate-200/90 bg-white/88 p-5 shadow-sm backdrop-blur-sm transition-all duration-500 ease-out dark:border-brand/35 dark:bg-[rgba(15,23,42,0.55)] hover:-translate-y-1.5 hover:border-teal-400/45 hover:shadow-[0_0_36px_-12px_rgba(13,148,136,0.18)] dark:hover:border-brand/50 dark:hover:shadow-[0_0_48px_-10px_rgba(45,212,191,0.28)] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/50 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-obsidian cursor-pointer"
       dir={locale === "he" ? "rtl" : "ltr"}
     >
       <div
@@ -33,7 +33,7 @@ function CareerEntryCard({
       />
       <div className="relative">
         <p
-          className="mb-3 inline-block rounded-full border border-slate-200/90 bg-slate-100/90 px-3 py-1 font-mono text-[11px] font-normal text-slate-500 transition-colors duration-300 group-hover/card:border-brand/25 group-hover/card:text-slate-600 dark:border-white/10 dark:bg-slate-900/60 dark:text-slate-500 dark:group-hover/card:border-brand/30 dark:group-hover/card:text-slate-400"
+          className="mb-3 inline-block rounded-full border border-slate-200/90 bg-slate-100/90 px-3 py-1 font-mono text-[11px] font-normal text-slate-600 transition-colors duration-300 group-hover/card:border-teal-400/35 group-hover/card:text-slate-800 dark:border-white/10 dark:bg-slate-900/60 dark:text-slate-500 dark:group-hover/card:border-brand/30 dark:group-hover/card:text-slate-400"
           dir="ltr"
         >
           {job.date}
@@ -48,7 +48,7 @@ function CareerEntryCard({
           {job.line}
         </p>
         {hint ? (
-          <p className="mt-3 font-mono text-[11px] text-brand/80 dark:text-brand/70">{hint}</p>
+          <p className="mt-3 font-mono text-[11px] text-teal-800/90 dark:text-brand/70">{hint}</p>
         ) : null}
       </div>
     </button>
@@ -58,7 +58,7 @@ function CareerEntryCard({
 function TimelineNode({ index }: { index: number }) {
   return (
     <span
-      className="relative z-[2] inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full ring-[5px] ring-slate-50 dark:ring-obsidian"
+      className="relative z-[2] inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full ring-[5px] ring-[#e8edf4] dark:ring-obsidian"
       aria-hidden
     >
       <span

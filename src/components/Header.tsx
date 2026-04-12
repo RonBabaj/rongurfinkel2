@@ -46,16 +46,16 @@ export function Header() {
     }`;
 
   return (
-    <header className="nav-liquid sticky top-0 z-50 border-b border-slate-300/70 bg-slate-200/55 shadow-[0_8px_28px_rgba(15,23,42,0.05)] backdrop-blur-xl backdrop-saturate-125 dark:border-white/[0.08] dark:bg-black/40 dark:shadow-[0_8px_40px_rgba(0,0,0,0.45)] dark:backdrop-blur-2xl dark:backdrop-saturate-125">
+    <header className="nav-liquid sticky top-0 z-50 border-b border-slate-200/90 bg-white/72 shadow-[0_8px_30px_rgba(15,23,42,0.06)] backdrop-blur-xl backdrop-saturate-125 dark:border-white/[0.08] dark:bg-black/40 dark:shadow-[0_8px_40px_rgba(0,0,0,0.45)] dark:backdrop-blur-2xl dark:backdrop-saturate-125">
       <div className="page-shell flex items-center justify-between min-h-14 py-2 gap-3">
         <Link
           href="/"
           data-cursor-hover
           aria-label={t("nav.home")}
-          className="font-mono text-sm text-brand-dim dark:text-brand shrink-0 hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-brand/50 focus:ring-offset-2 focus:ring-offset-slate-200/90 dark:focus:ring-offset-black rounded inline-flex items-center"
+          className="font-mono text-sm text-brand-dim dark:text-brand shrink-0 hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-brand/50 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-black rounded inline-flex items-center"
         >
           <span dir={locale === "he" ? "rtl" : "ltr"}>{t("nav.brandName")}</span>
-          <span className="code-cursor inline-block min-w-[0.55ch] text-brand" aria-hidden>
+          <span className="code-cursor inline-block min-w-[0.55ch] text-teal-600 dark:text-brand" aria-hidden>
             _
           </span>
         </Link>
@@ -96,11 +96,11 @@ export function Header() {
               </>
             )}
           </a>
-          <div className="flex items-center gap-1 ps-3 border-s border-slate-200 dark:border-white/10">
+          <div className="flex items-center gap-1 ps-3 border-s border-slate-200/90 dark:border-white/10">
             <button
               type="button"
               onClick={toggleTheme}
-              className="p-2 rounded text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors focus:outline-none focus:ring-2 focus:ring-brand/50 focus:ring-offset-2 focus:ring-offset-slate-200/90 dark:focus:ring-offset-obsidian"
+              className="p-2 rounded text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors focus:outline-none focus:ring-2 focus:ring-brand/50 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-obsidian"
               aria-label={t("a11y.toggleTheme")}
             >
               {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
@@ -108,7 +108,7 @@ export function Header() {
             <button
               type="button"
               onClick={() => setLocale(locale === "en" ? "he" : "en")}
-              className="px-2 py-1 text-xs font-medium rounded text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors focus:outline-none focus:ring-2 focus:ring-brand/50 focus:ring-offset-2 focus:ring-offset-slate-200/90 dark:focus:ring-offset-obsidian"
+              className="px-2 py-1 text-xs font-medium rounded text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors focus:outline-none focus:ring-2 focus:ring-brand/50 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-obsidian"
               aria-label={t("a11y.setLanguage")}
             >
               {locale === "en" ? "עב" : "EN"}

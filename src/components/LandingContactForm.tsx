@@ -158,11 +158,11 @@ export function LandingContactForm() {
                 {locale === "he" ? (
                   <>
                     <span>{t("home.locationValue")}</span>
-                    <MapPin className="w-4 h-4 text-brand/80 shrink-0" aria-hidden />
+                    <MapPin className="w-4 h-4 text-teal-800 dark:text-brand/80 shrink-0" aria-hidden />
                   </>
                 ) : (
                   <>
-                    <MapPin className="w-4 h-4 text-brand/80 shrink-0" aria-hidden />
+                    <MapPin className="w-4 h-4 text-teal-800 dark:text-brand/80 shrink-0" aria-hidden />
                     <span>{t("home.locationValue")}</span>
                   </>
                 )}
@@ -207,11 +207,11 @@ export function LandingContactForm() {
               {locale === "he" ? (
                 <>
                   <span>{t("home.locationValue")}</span>
-                  <MapPin className="w-4 h-4 text-brand/80 shrink-0" aria-hidden />
+                  <MapPin className="w-4 h-4 text-teal-800 dark:text-brand/80 shrink-0" aria-hidden />
                 </>
               ) : (
                 <>
-                  <MapPin className="w-4 h-4 text-brand/80 shrink-0" aria-hidden />
+                  <MapPin className="w-4 h-4 text-teal-800 dark:text-brand/80 shrink-0" aria-hidden />
                   <span>{t("home.locationValue")}</span>
                 </>
               )}

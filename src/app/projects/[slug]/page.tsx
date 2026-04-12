@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { playgroundItems, getPlaygroundItemBySlug } from "@/data/playground";
-import { PlaygroundSlugContent } from "./PlaygroundSlugContent";
+import { projectDetails, getProjectDetailBySlug } from "@/data/projectDetails";
+import { ProjectDetailContent } from "./ProjectDetailContent";
 
 export function generateStaticParams() {
-  return playgroundItems.map((item) => ({ slug: item.slug }));
+  return projectDetails.map((item) => ({ slug: item.slug }));
 }
 
 interface PageProps {
@@ -13,10 +13,10 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const item = getPlaygroundItemBySlug(slug);
+  const item = getProjectDetailBySlug(slug);
   if (!item) return {};
 
-  const path = `/playground/${slug}/`;
+  const path = `/projects/${slug}/`;
   return {
     title: item.title,
     description: item.shortDescription,
@@ -35,10 +35,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default async function PlaygroundSlugPage({ params }: PageProps) {
+export default async function ProjectDetailPage({ params }: PageProps) {
   const { slug } = await params;
-  const item = getPlaygroundItemBySlug(slug);
+  const item = getProjectDetailBySlug(slug);
   if (!item) notFound();
 
-  return <PlaygroundSlugContent item={item} />;
+  return <ProjectDetailContent item={item} />;
 }

@@ -9,31 +9,26 @@ html {
 :root {
   --accent: 172 76% 54%; /* #2EE6D4 — brand teal (punchier) */
   --muted: 148 163 184; /* slate-400 */
-  /* Light theme canvas (shows through transparent layers) */
-  --light-bg: #dce3ec;
+  /* Light: soft cool white — same *idea* as dark (grid + glow) but airy, not muddy gray */
+  --light-bg: #e8edf4;
 }
 
-/* Light: same *structure* as dark — vertical lines + dot grid + teal/indigo glows — lighter palette */
+/* Light: mirror dark layout (verticals + dots + blooms); readable text + accents */
 body {
   @apply antialiased text-slate-800;
   background-color: var(--light-bg);
   background-image:
-    /* Soft top highlight (air / depth) */
-    linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, rgba(220, 227, 236, 0) 45%),
-    /* Vertical rhythm — teal-tinted, softer than dark */
+    linear-gradient(180deg, rgba(255, 255, 255, 0.72) 0%, rgba(232, 237, 244, 0) 48%),
     repeating-linear-gradient(
       90deg,
       transparent,
       transparent 107px,
-      rgba(46, 230, 212, 0.095) 107px,
-      rgba(46, 230, 212, 0.095) 108px
+      rgba(13, 148, 136, 0.07) 107px,
+      rgba(13, 148, 136, 0.07) 108px
     ),
-    /* Dot grid — mint on cool gray */
-    radial-gradient(rgba(46, 230, 212, 0.14) 1px, transparent 1px),
-    /* Teal bloom (mirror dark ellipse, lighter) */
-    radial-gradient(ellipse 90% 55% at 50% -15%, rgba(46, 230, 212, 0.14), transparent 55%),
-    /* Indigo corner accent (mirror dark, lighter) */
-    radial-gradient(ellipse 50% 35% at 100% 0%, rgba(99, 102, 241, 0.1), transparent 50%);
+    radial-gradient(rgba(13, 148, 136, 0.11) 1px, transparent 1px),
+    radial-gradient(ellipse 90% 55% at 50% -15%, rgba(45, 212, 191, 0.1), transparent 55%),
+    radial-gradient(ellipse 50% 35% at 100% 0%, rgba(99, 102, 241, 0.07), transparent 50%);
   background-size:
     auto,
     auto,
@@ -138,7 +133,7 @@ a {
   }
 
   .glass-card {
-    @apply rounded-xl border border-slate-300/80 bg-slate-50/90 backdrop-blur-md shadow-sm shadow-slate-900/[0.06] shadow-teal-600/[0.04];
+    @apply rounded-xl border border-slate-200/90 bg-white/80 backdrop-blur-md shadow-sm shadow-slate-900/[0.06] shadow-teal-900/[0.04];
   }
 
   html.dark .glass-card {
@@ -344,6 +339,30 @@ html.dark[dir="rtl"] .link-arrow-shift::after {
 .profile-code-body span.code-syntax-str {
   color: #6ee7b7 !important;
   font-weight: 600 !important;
+}
+
+/* Light theme: same syntax roles as dark, tuned for a light panel (readable, still “terminal”) */
+html:not(.dark) .profile-code-body span.code-syntax-kw {
+  color: #6d28d9 !important;
+}
+html:not(.dark) .profile-code-body span.code-syntax-id {
+  color: #312e81 !important;
+}
+html:not(.dark) .profile-code-body span.code-syntax-prop {
+  color: #475569 !important;
+}
+html:not(.dark) .profile-code-body span.code-syntax-punct {
+  color: #64748b !important;
+}
+html:not(.dark) .profile-code-body span.code-syntax-str {
+  color: #047857 !important;
+  font-weight: 600 !important;
+}
+html:not(.dark) .code-cursor-hero {
+  color: #0f766e !important;
+}
+html:not(.dark) .code-titlebar-filename {
+  color: #475569 !important;
 }
 
 /* Career modal — minimize-to-dock exit */

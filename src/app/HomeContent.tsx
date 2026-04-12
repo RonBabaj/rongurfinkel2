@@ -21,10 +21,10 @@ import { navigateToLandingHash } from "@/lib/landingHashNav";
 
 /** Base44: primary CTA = solid teal (View Projects); secondary = outline (Get in touch). */
 const primaryBtn =
-  "inline-flex items-center justify-center gap-2 rounded-lg bg-brand px-7 py-3.5 text-base font-semibold text-obsidian shadow-[0_0_28px_-4px_rgba(46,230,212,0.48)] transition-all duration-300 hover:scale-[1.02] hover:bg-brand/90 hover:shadow-[0_0_40px_-4px_rgba(46,230,212,0.62)] active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50 dark:focus-visible:ring-offset-obsidian";
+  "inline-flex items-center justify-center gap-2 rounded-lg bg-brand px-7 py-3.5 text-base font-semibold text-obsidian shadow-[0_0_28px_-4px_rgba(46,230,212,0.48)] transition-all duration-300 hover:scale-[1.02] hover:bg-brand/90 hover:shadow-[0_0_40px_-4px_rgba(46,230,212,0.62)] active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-obsidian";
 
 const secondaryBtn =
-  "inline-flex items-center justify-center gap-2 rounded-lg border border-slate-400/50 dark:border-white/20 bg-transparent px-7 py-3.5 text-base font-medium text-slate-800 dark:text-slate-100 transition-all duration-300 hover:scale-[1.02] hover:border-brand/55 hover:bg-brand/8 hover:shadow-[0_0_32px_-8px_rgba(46,230,212,0.26)] active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/50 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50 dark:focus-visible:ring-offset-obsidian";
+  "inline-flex items-center justify-center gap-2 rounded-lg border border-slate-400/50 dark:border-white/20 bg-transparent px-7 py-3.5 text-base font-medium text-slate-800 dark:text-slate-100 transition-all duration-300 hover:scale-[1.02] hover:border-brand/55 hover:bg-brand/8 hover:shadow-[0_0_32px_-8px_rgba(46,230,212,0.26)] active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/50 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-obsidian";
 
 const linkArrow =
   "link-arrow-shift inline-flex items-center gap-1 rtl:flex-row-reverse font-mono text-sm text-brand-dim dark:text-brand transition-all duration-300 hover:gap-2";
@@ -102,11 +102,11 @@ export function HomeContent() {
           className="mt-16 sm:mt-20 flex flex-col items-center gap-2"
           aria-hidden
         >
-          <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.32em] text-brand dark:text-brand [text-shadow:0_0_20px_rgba(46,230,212,0.35)]">
+          <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.32em] text-teal-800 dark:text-brand dark:[text-shadow:0_0_20px_rgba(46,230,212,0.35)]">
             {t("home.scrollHint")}
           </span>
           <ChevronDown
-            className="h-5 w-5 text-brand [filter:drop-shadow(0_0_10px_rgba(46,230,212,0.45))] motion-reduce:animate-none animate-scroll-hint-chevron"
+            className="h-5 w-5 text-teal-700 dark:text-brand motion-reduce:animate-none animate-scroll-hint-chevron dark:[filter:drop-shadow(0_0_10px_rgba(46,230,212,0.45))]"
             strokeWidth={2.5}
             aria-hidden
           />
