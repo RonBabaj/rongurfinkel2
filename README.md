@@ -47,7 +47,7 @@ src/
   types/               # Shared TS types (career, projects, …)
 public/                # .htaccess (Apache/LiteSpeed), og-thumbnail.png, featured SVGs, …
 deploy/                # Optional Docker / env examples for other services
-next.config.mjs        # static export, trailingSlash, dev webpack memory cache (see below)
+next.config.mjs        # static export, trailingSlash
 tailwind.config.ts
 ```
 
@@ -76,7 +76,7 @@ Featured cards on the home page use **`hrefForLandingProject()`** in `src/data/l
 
 ## Requirements
 
-- **Node.js** — **20.x** recommended (matches GitHub Actions). **18+** generally works with this Next.js line; use the same major version locally and in CI when possible.
+- **Node.js** — **22.x** recommended (matches GitHub Actions and avoids the Actions runner deprecation of Node 20). **18+** often still works locally; align major versions with CI when debugging build issues.
 - **npm** — Comes with Node; install dependencies with `npm ci` in CI and `npm install` locally.
 - **Optional SWC binaries** — Next pulls `@next/swc-darwin-arm64` (etc.) as **optional** dependencies. If your npm config uses `omit=optional` / `--no-optional`, Turbopack will fail with `turbo.createProject is not supported by the wasm bindings`. Use **`npm run dev`** (webpack, default here) or reinstall with optional deps, e.g. `npm install --include=optional`.
 
@@ -88,7 +88,7 @@ Featured cards on the home page use **`hrefForLandingProject()`** in `src/data/l
 | -------------- | ------- |
 | `npm run dev`  | Dev server (webpack; works even if optional `@next/swc-*` wasn’t installed) |
 | `npm run dev:turbo` | Dev with Turbopack (needs native SWC — run `npm install` **with** optional deps, see below) |
-| `npm run build`| Production build; static files emitted to **`out/`** |
+| `npm run build`| Production build (Next 16 default bundler). Output: **`out/`** |
 | `npm run start`| Serves the **non-export** server build (optional; static hosting uses **`out/`** only) |
 | `npm run lint` | `next lint` (ESLint) |
 
@@ -109,11 +109,16 @@ npm run build
 
 Open **`out/index.html`** via a static server if you want to verify the export (e.g. `npx serve out`).
 
-### Dev: webpack cache / `ENOENT` on `.pack.gz`
+### Dev: `ChunkLoadError` / `ENOENT` on `.next`
 
-`next.config.mjs` sets **`webpack(config, { dev })`** so that when **`dev`** is true, **`config.cache = { type: "memory" }`** — development does **not** use disk packs under **`.next/dev/cache/webpack/`**. That avoids **`ENOENT`** / **`unhandledRejection`** when pack files go missing (Fast Refresh, deleting **`.next`** while `next dev` runs, or sync tools touching the cache).
+If you see **`ChunkLoadError`** (e.g. **`app/layout.js`** timed out) or webpack **`ENOENT`** on **`.pack.gz`** files:
 
-If the dev server ever acts odd, stop it, run **`rm -rf .next`**, then **`npm run dev`** again. Do not run two **`next dev`** processes on the same repo path at once.
+1. Stop **`npm run dev`**.  
+2. Run **`rm -rf .next`**.  
+3. Start again with **`npm run dev`** (or **`npm run dev:turbo`** if you have native SWC installed).  
+4. Hard-refresh the browser (or use a private window) so old chunk URLs are not cached.
+
+Avoid running two dev servers on the same project folder, and avoid deleting **`.next`** while the server is still running.
 
 ---
 
@@ -136,7 +141,7 @@ NEXT_PUBLIC_SITE_URL=https://rongurfinkel.com
 On **push to `main`**, [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml):
 
 1. Checks out the repo  
-2. Sets up **Node 20**  
+2. Sets up **Node 22** and **`FORCE_JAVASCRIPT_ACTIONS_TO_NODE24=true`** (Actions runtime / deprecation notice)  
 3. Runs **`npm ci`** and **`npm run build`**  
 4. Uploads the build output folder (**`out/`** for this project) with [SamKirkland/FTP-Deploy-Action](https://github.com/SamKirkland/FTP-Deploy-Action) v4.3.5  
 
