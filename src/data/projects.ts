@@ -14,7 +14,7 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/RonBabaj/SpeechInsight2",
     detailSlug: "speechinsight2",
     status: "live",
-    demoUrl: "https://speechinsight2.onrender.com",
+    demoUrl: "https://speechinsight.rongurfinkel.com",
   },
   {
     id: "fly-fix",
