@@ -52,7 +52,7 @@ export const projectDetails: ProjectDetail[] = [
     shortDescription:
       "Audio transcription app: upload a file in the browser, get a transcript. Backend API + UI, deployed as one product.",
     status: "live",
-    demoUrl: "https://speechinsight2.onrender.com",
+    demoUrl: "https://speechinsight.rongurfinkel.com",
     githubUrl: "https://github.com/RonBabaj/SpeechInsight2",
     tech: ["C#", ".NET", "ASP.NET Core"],
     overview:
