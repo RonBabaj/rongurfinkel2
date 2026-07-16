@@ -33,7 +33,7 @@ Personal site and project hub built with **Next.js** (App Router), **React 18**,
 ## Repository layout
 
 ```text
-.github/workflows/   # CI: build + FTP deploy to Hostinger
+.github/workflows/   # CI/CD: SSH deploy to Ubuntu VPS (Docker Compose)
 src/
   app/                 # App Router: page.tsx per route, layouts, globals.css, sitemap, robots, icon
     projects/
@@ -76,7 +76,7 @@ Featured cards on the home page use **`hrefForLandingProject()`** in `src/data/l
 
 ## Requirements
 
-- **Node.js** — **22.x** recommended (matches GitHub Actions and avoids the Actions runner deprecation of Node 20). **18+** often still works locally; align major versions with CI when debugging build issues.
+- **Node.js** — **22.x** recommended. **18+** often still works locally; align major versions when debugging build issues.
 - **npm** — Comes with Node; install dependencies with `npm ci` in CI and `npm install` locally.
 - **Optional SWC binaries** — Next pulls `@next/swc-darwin-arm64` (etc.) as **optional** dependencies. If your npm config uses `omit=optional` / `--no-optional`, Turbopack will fail with `turbo.createProject is not supported by the wasm bindings`. Use **`npm run dev`** (webpack, default here) or reinstall with optional deps, e.g. `npm install --include=optional`.
 
@@ -136,65 +136,59 @@ NEXT_PUBLIC_SITE_URL=https://rongurfinkel.com
 
 ---
 
-## Deployment (GitHub Actions → Hostinger FTP)
+## Deployment (GitHub Actions → Ubuntu VPS)
 
-On **push to `main`**, [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml):
+Production runs on an **Ubuntu VPS** with **Docker Compose**, fronted by **Nginx Proxy Manager**. The app checkout lives at **`/opt/apps/rongurfinkel`**.
 
-1. Checks out the repo  
-2. Sets up **Node 22** and **`FORCE_JAVASCRIPT_ACTIONS_TO_NODE24=true`** (Actions runtime / deprecation notice)  
-3. Runs **`npm ci`** and **`npm run build`**  
-4. Uploads the build output folder (**`out/`** for this project) with [SamKirkland/FTP-Deploy-Action](https://github.com/SamKirkland/FTP-Deploy-Action) v4.3.5  
+[`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) runs on:
+
+- **Push to `main`**
+- **Manual run** (`workflow_dispatch` in the Actions tab)
+
+### What the workflow does
+
+1. SSHs into the VPS  
+2. In `/opt/apps/rongurfinkel`: `git fetch origin` → `git reset --hard origin/main`  
+3. Rebuilds and restarts containers: `docker compose down` → `build --pull` → `up -d`  
+4. Prunes dangling images: `docker image prune -f`  
+5. Verifies **`https://rongurfinkel.com/`** returns **HTTP 200** (retries briefly so the stack can settle)  
+
+Any remote command failure or a failed health check **fails the workflow**. Concurrent runs are serialized with a concurrency group so two deploys cannot race; an in-flight deploy is not cancelled.
+
+The deploy steps are **idempotent**—safe to re-run via **Re-run jobs** or **Run workflow**.
 
 ### Repository secrets
 
-Configure these under **GitHub → Settings → Secrets and variables → Actions**:
+Configure these under **GitHub → Settings → Secrets and variables → Actions**. Do **not** commit secrets to the repository.
 
 | Secret | Purpose |
 | ------ | ------- |
-| `FTP_SERVER` | FTP hostname (e.g. from Hostinger hPanel) |
-| `FTP_USERNAME` | FTP username |
-| `FTP_PASSWORD` | FTP password |
+| `VPS_HOST` | VPS hostname or IP |
+| `VPS_USER` | SSH username |
+| `VPS_SSH_KEY` | Private SSH key for that user (full PEM contents) |
 
-### Remote directory
+### Server prerequisites
 
-The workflow uploads to:
+- Git clone of this repo at `/opt/apps/rongurfinkel`, with remote access to `origin` (deploy key or credentials as needed)  
+- Docker and Docker Compose plugin installed  
+- A `docker-compose.yml` (and related image build context) in that directory  
+- Nginx Proxy Manager proxying the public hostname to the Compose service  
 
-```text
-/domains/rongurfinkel.com/public_html/
+### Manual deploy
+
+In GitHub: **Actions → Deploy to VPS → Run workflow**.
+
+Or on the server:
+
+```bash
+cd /opt/apps/rongurfinkel
+git fetch origin
+git reset --hard origin/main
+docker compose down
+docker compose build --pull
+docker compose up -d
+docker image prune -f
 ```
-
-If your Hostinger account uses a different domain folder, change **`server-dir`** in the workflow to match hPanel’s **public_html** path.
-
-### FTP timeouts
-
-The action sets **`timeout: 600000`** (10 minutes) because the default 30s limit often causes **“Timeout (control socket)”** when using **`dangerous-clean-slate: true`** (full remote wipe + re-upload). The job also sets **`timeout-minutes: 30`** so GitHub does not kill the run early.
-
-If uploads still fail:
-
-- Confirm in **hPanel → Files → FTP Accounts** whether you need **`protocol: ftps`** and a specific **port** (add the corresponding `with:` keys to the action per the [action README](https://github.com/SamKirkland/FTP-Deploy-Action)).  
-- Temporarily set **`log-level: verbose`** on the deploy step to see where it stalls.
-
-### FTP `connect ETIMEDOUT` (before login)
-
-Errors like **`connect ETIMEDOUT … port 21 (control socket)`** mean the runner **never opens a TCP connection** to the FTP host. That is **not** the same as the long FTP “control socket” timeout during upload—raising `timeout:` in the action **does not fix ETIMEDOUT**.
-
-Typical causes:
-
-- **Path from GitHub’s cloud runners to Hostinger is filtered** (host firewall, DDoS edge, or policy blocking datacenter IP ranges).  
-- **Wrong host** in `FTP_SERVER` (typo or obsolete IP)—still points at something that doesn’t answer on 21.  
-- **Local or regional blocking** of port 21 (rarer from Actions, but possible in combination with routing).
-
-What to try:
-
-1. **Use the FTP hostname from hPanel** (e.g. `ftp.yourdomain.com` or the server name Hostinger shows), not a stale IP, unless support told you otherwise.  
-2. From your **Mac**, test reachability: `nc -vz YOUR_FTP_HOST 21` (or FileZilla). If **your home network** works but **Actions always ETIMEDOUT**, the block is likely **between GitHub and Hostinger**—ask Hostinger support whether FTP from **GitHub Actions** ([published IP ranges](https://api.github.com/meta)) can be allowed, or whether **SFTP/SSH deploy** is available on your plan.  
-3. **Alternatives if FTP from CI stays blocked:** deploy with **[web-deploy](https://github.com/SamKirkland/web-deploy)** over **SSH** (if you have SSH to the account), run a **self-hosted** Actions runner on a network that can reach FTP, or build in CI and upload artifacts / use another host (e.g. object storage + CDN) that Actions can reach.
-
-### 403 on `/projects`, `/about`, etc.
-
-Static export outputs folders such as `out/projects/index.html`. Many shared hosts return **403** for `/projects` if they treat it as a directory, disable **Indexes**, and do not map the request to `index.html`. This repo sets **`trailingSlash: true`** and ships **`public/.htaccess`** into **`out/`** so rewrites and **`DirectoryIndex`** line up with that layout. Ensure **`out/.htaccess`** is actually on the server after FTP (some clients hide dotfiles—confirm in hPanel **File Manager**).
-
-Detail pages are emitted as **`out/projects/<slug>/index.html`** (e.g. `fly-fix`, `speechinsight2`). There is **no** `/playground/` route anymore; old bookmarks to **`/playground/...`** need **redirect rules** on the host if you still want them to work.
 
 ---
 
