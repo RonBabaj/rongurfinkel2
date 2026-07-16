@@ -184,9 +184,8 @@ Or on the server as `deploy`:
 cd /opt/apps/rongurfinkel2
 git fetch origin
 git reset --hard origin/main
-docker compose down
 docker compose build --pull
-docker compose up -d
+docker compose up -d --remove-orphans
 docker image prune -f
 ```
 
