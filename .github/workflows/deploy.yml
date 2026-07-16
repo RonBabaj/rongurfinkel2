@@ -23,12 +23,11 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
-          # Fail the job if any remote command fails
-          script_stop: true
-          # Idempotent: safe to re-run; resets to origin/main and recreates containers
+          # Idempotent: safe to re-run; resets to origin/main and recreates containers.
+          # Failures exit via set -euo pipefail (script_stop is not supported on this action version).
           script: |
             set -euo pipefail
-            cd /opt/apps/rongurfinkel
+            cd /opt/apps/rongurfinkel2
             git fetch origin
             git reset --hard origin/main
             docker compose down

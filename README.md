@@ -138,7 +138,7 @@ NEXT_PUBLIC_SITE_URL=https://rongurfinkel.com
 
 ## Deployment (GitHub Actions → Ubuntu VPS)
 
-Production runs on an **Ubuntu VPS** with **Docker Compose**, fronted by **Nginx Proxy Manager**. The app checkout lives at **`/opt/apps/rongurfinkel`**.
+Production runs on an **Ubuntu VPS** with **Docker Compose**, fronted by **Nginx Proxy Manager**. The app checkout lives at **`/opt/apps/rongurfinkel2`** (Compose service/container: `rongurfinkel-frontend` on port **3000**).
 
 [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) runs on:
 
@@ -148,7 +148,7 @@ Production runs on an **Ubuntu VPS** with **Docker Compose**, fronted by **Nginx
 ### What the workflow does
 
 1. SSHs into the VPS  
-2. In `/opt/apps/rongurfinkel`: `git fetch origin` → `git reset --hard origin/main`  
+2. In `/opt/apps/rongurfinkel2`: `git fetch origin` → `git reset --hard origin/main`  
 3. Rebuilds and restarts containers: `docker compose down` → `build --pull` → `up -d`  
 4. Prunes dangling images: `docker image prune -f`  
 5. Verifies **`https://rongurfinkel.com/`** returns **HTTP 200** (retries briefly so the stack can settle)  
@@ -164,24 +164,24 @@ Configure these under **GitHub → Settings → Secrets and variables → Action
 | Secret | Purpose |
 | ------ | ------- |
 | `VPS_HOST` | VPS hostname or IP |
-| `VPS_USER` | SSH username |
+| `VPS_USER` | SSH username (`deploy`) |
 | `VPS_SSH_KEY` | Private SSH key for that user (full PEM contents) |
 
 ### Server prerequisites
 
-- Git clone of this repo at `/opt/apps/rongurfinkel`, with remote access to `origin` (deploy key or credentials as needed)  
-- Docker and Docker Compose plugin installed  
+- Git clone of this repo at `/opt/apps/rongurfinkel2`, writable by the `deploy` user (e.g. `chown -R deploy:deploy /opt/apps/rongurfinkel2`)  
+- Docker and Docker Compose plugin installed; `deploy` in the `docker` group  
 - A `docker-compose.yml` (and related image build context) in that directory  
-- Nginx Proxy Manager proxying the public hostname to the Compose service  
+- Nginx Proxy Manager proxying `rongurfinkel.com` to the Compose service (internal port **3000**)  
 
 ### Manual deploy
 
 In GitHub: **Actions → Deploy to VPS → Run workflow**.
 
-Or on the server:
+Or on the server as `deploy`:
 
 ```bash
-cd /opt/apps/rongurfinkel
+cd /opt/apps/rongurfinkel2
 git fetch origin
 git reset --hard origin/main
 docker compose down
