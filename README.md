@@ -149,7 +149,7 @@ Production runs on an **Ubuntu VPS** with **Docker Compose**, fronted by **Nginx
 
 1. SSHs into the VPS  
 2. In `/opt/apps/rongurfinkel2`: `git fetch origin` → `git reset --hard origin/main`  
-3. Rebuilds and restarts containers: `docker compose down` → `build --pull` → `up -d`  
+3. Rebuilds then rolls containers: `docker compose build --pull` → `up -d` (no `down` first, so a failed build does not take the site offline)  
 4. Prunes dangling images: `docker image prune -f`  
 5. Verifies **`https://rongurfinkel.com/`** returns **HTTP 200** (retries briefly so the stack can settle)  
 
